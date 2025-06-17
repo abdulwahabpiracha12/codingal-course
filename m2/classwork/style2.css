@@ -1,0 +1,50 @@
+body{
+    font-family: "arial", "san-serif";
+    background-color:rgb(50, 119, 131);
+    color:white;
+}
+
+h1{
+    color:aqua;
+}
+
+a{
+    color:beige;
+    text-decoration:none;
+}
+
+a:hover{
+    color:blue;
+}
+
+ul>li{
+    font-weight:bold;
+}
+
+h1+p{
+    background-color:aqua;
+    padding:10px;
+    border-radius:5px;
+}
+
+ul li:nth-child(3) {
+    background-color:bisque
+}
+
+p:not(first of type){
+    text-decoration:underline;
+}
+
+ul li::before{
+    content:"🚀";
+}
+
+a::after{
+    content:"🍬";
+}
+
+p::first-letter{
+    font-size:200%;
+    color:antiquewhite
+}
+    

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript</title>
+    </head>
+    <body>
+        <button onclick="myfunction(5,3)">Execute JS function</button>
+        <script>
+            //function definition 
+            function myfunction(x ,y=4) {
+                if (y=== undefined)  {
+                    y = 2;
+                }
+                 document.write(x * y);
+            }
+        </script>
+    </body>
+</html>
