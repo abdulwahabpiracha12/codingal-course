@@ -3,7 +3,7 @@
     <body>
         <h2> JavaScript For Loop </h2>
         <script>
-            var cricketers = ["Apple","Mango","Grapes","Watermelom","Jack Fruit","Banana","Cherry"]
+            var cricketers = ["Haris rauf","Saim ayub","Salman ali agha","Hassan nawaz","Shoaib akhtar","Mohammad rizwan","Babar azam"]
             //array;Array is Heterogeneous in nature
             for (i = 0; i < cricketers.length; i++) {
                 var text = cricketers[i] + '<br>' ;
