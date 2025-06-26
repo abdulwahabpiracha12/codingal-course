@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2> JavaScript For Loop </h2>
+        <script>
+            var numbers = ["10","75","61","55","32","46","100"]
+            //array;Array is Heterogeneous in nature
+            for (i = 0; i < numbers.length; i++) {
+                var text = numbers[i] + '<br>' ;
+                document.write(text);
+            }
+            
+        </script>
+    </body>
+</html>
