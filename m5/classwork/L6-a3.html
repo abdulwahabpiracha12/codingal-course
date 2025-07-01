@@ -23,7 +23,7 @@
         <div class="container">
             <h1>Calculator</h1>
             <div class="row">
-                <input type="text" value="result" class="result" id="result" value="" placeholder="Result"
+                <input type="text" value="" class="result" id="result" value="" placeholder="Result"
                  readonly>
                  <input type="button" value="+" onclick="setScreenValue('+')">
                  <div class="row">
@@ -51,11 +51,11 @@
                       <input type="button" value="%" onclick="setScreenValue('%')">
                         <input type="button" value="θ" onclick="setScreenValue('θ')">
                           <input type="button" value="." onclick="setScreenValue('.')">
-                            <input type="button" value="=" onclick="setScreenValue('=')">
+                            <input type="button" value="=" onclick="calculateResult('=')">
                       </div>
 
                       <div class="row">
-                         <input type="button" value="CLEAR" onclick="clearScreen()" id="clear" 
+                         <input type="button" value="CLEAR" onclick="clearscreen()" id="clear" 
                          class="clear-button" >
                       </div>
                  </div>
