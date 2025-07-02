@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <h2>Convert a JavaScript object into a JSON string, and send it to the server</h2>
-        <p id="result1"></p>
-        <p id="result2"></p>
-        <p id="result3"></p>
-        <script>
-            var myObj = {name: "Riya", age: 12, grade: 7};
-            var myJSON = JSON.stringify(myObj);
-            var newObj = JSON.parse(myJSON);
-            document.getElementById("result1").innerHTML = newObj.name;
-            document.getElementById("result2").innerHTML = newObj.age;
-            document.getElementById("result3").innerHTML = newObj.grade;
-        </script>
-    </body>
+<head>
+  <title>Asynchronous function in Js</title>
+</head>
+<body>
+
+  <h2>Jason Function </h2>
+  <button onclick="jasonFunction()">Get Data</button>
+  <div id="result"></div>
+
+  <script>
+    // Simulate a function that returns data after a delay
+    function getUserData() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("Name: Abdulwahab, Age: 14");
+        }, 2000); // 2 seconds delay
+      });
+    }
+
+    // Async function that awaits the simulated data
+    async function jasonFunction() {
+      const resultDiv = document.getElementById("result");
+      resultDiv.textContent = "Getting data...";
+      
+      const data = await getUserData();
+      resultDiv.textContent = "Data received: " + data;
+    }
+  </script>
+
+</body>
 </html>
