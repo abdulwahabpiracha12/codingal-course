@@ -14,6 +14,6 @@ function calculateResult() {
     try {
         resultElement.value = eval(expression);    
     } catch (e) {
-        resultElement.value = 'Invalid expression'
+        resultElement.value = 'Error'
     }
 }
