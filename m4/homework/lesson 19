@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h2>A simple Calculator</h2>
+        <p>It will add two variables A and B and then divide them by 2</p>
+
+        <p id = "demo"></p>
+        <script>
+            function add(a ,b) {
+                return a + b;
+            }
+            function average(a ,b) {
+                return add(a ,b) / 2;
+            }
+            let result = average(80, 50);
+            document.getElementById("demo").innerHTML = result;
+        </script>
+    </body>
+</html>
