@@ -1,23 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <p>Enter a number and click OK:</p>
-        <input id="id1" type="number" min="18" max="50" required>
+<head>
+  <title>Validate Inputs - Login Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .error {
+      color: red;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+    input {
+      display: block;
+      margin-bottom: 10px;
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
 
-        <button onclick="myFunction()">OK</button>
+<div class="container">
+  <h2>Login Form</h2>
+  <form id="loginForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
 
-        <p>If the age is less than 18 or greater than 50, an error message will be displayed</p>
-        <p id="result"></p>
-        <script>
-            function myFunction() {
-                var inpObj = document.getElementById("id1")
-                if (!inpObj.checkValidity()) {
-                    document.getElementById("result").innerHTML = inpObj.
-                    validationMessage;
-                } else {
-                    document.getElementById("result").innerHTML = "input OK";
-                }
-            }
-        </script>
-    </body>
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required min="0">
+
+    <button type="submit">Submit</button>
+    <div id="message"></div>
+  </form>
+</div>
+
+<script>
+  document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const age = parseInt(document.getElementById("age").value, 10);
+    const messageDiv = document.getElementById("message");
+
+    messageDiv.textContent = "";
+    messageDiv.className = "";
+
+    if (name === "") {
+      messageDiv.textContent = "Name cannot be empty.";
+      messageDiv.className = "error";
+      return;
+    }
+
+    if (isNaN(age)) {
+      messageDiv.textContent = "Please enter a valid age.";
+      messageDiv.className = "error";
+      return;
+    }
+
+    if (age < 18) {
+      messageDiv.textContent = "You must be at least 18 years old.";
+      messageDiv.className = "error";
+      return;
+    }
+
+    messageDiv.textContent = "Login successful. Welcome, " + name + "!";
+    messageDiv.style.color = "green";
+  });
+</script>
+
+</body>
 </html>
