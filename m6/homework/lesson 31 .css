@@ -1,0 +1,32 @@
+body {
+  background: #252525;
+  font-family: "Baloo Tamma 2", cursive;
+  scroll-behavior: smooth;
+  margin: 0;
+}
+
+.navigation-link {
+  border: 5px solid transparent;
+}
+
+.navigation-link:hover {
+  text-decoration: none;
+  border-bottom: 5px solid yellowgreen;
+  transition: 0.5s ease;
+}
+
+.m-heading {
+  font-family: "Roboto Slab", serif;
+}
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url('roboticarm.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
