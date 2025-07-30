@@ -1,0 +1,66 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(0, 0, 0);
+}
+
+#container {
+      width: 700px;
+      height: 550px;
+      background-image: linear-gradint(rgba(93, 31, 156, 0.3), rgba(106, 177, 35, 0.3)),
+      url(); 
+      margin: 20px auto;
+}
+
+#calculator {
+    width: 320px;
+    height: 520px;
+    background-color: hsla(316, 54%, 45%, 0.47);
+    margin: 0px auto;
+    top: 20px;
+    position: relative;
+    border-radius: 50px;
+}
+
+#keyboard {
+   height: 400px;
+}
+
+.operator,
+.number,
+.empty {
+    width: 50px;
+    height: 50px;
+    margin: 15px;
+    float: left;
+    border-radius:50%;
+    border-width: 0;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.number,
+.empty {
+    background-color: #6fe0a0;
+}
+
+
+
+.operator{
+    background-color: #916fe0;
+}
+
+.number,
+.operator {
+    cursor: pointer;
+}
+
+.operator:active,
+.number:active {
+    font-size: 30px;
+}
+
+.operator:focus,
+.number:focus,
+.empty:focus {
+    outline: 2px dashed rgb(205, 31, 141);
+}
