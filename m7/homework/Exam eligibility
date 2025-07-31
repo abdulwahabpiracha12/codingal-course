@@ -1,0 +1,11 @@
+age = int(input("Enter your age: "))
+marks = int(input("Enter your total marks percentage: "))
+
+if age >= 18 and marks >= 75:
+    print("✅ You are eligible for the exam.")
+elif age < 18 and marks < 75:
+    print("❌ You are not eligible for exam because your age is below 18 and your marks are less than 75%.")
+elif age < 18:
+    print("❌ You are not eligible for exam because your age is below 18.")
+else:
+    print("❌ You are not eligible for exam because your marks percentage is less than 75%.")
