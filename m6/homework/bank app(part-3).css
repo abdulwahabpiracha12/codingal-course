@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+h2 {
+    color: #444;
+}
+
+.income-item {
+    color: green;
+    font-weight: bold;
+}
+
+.expense-item {
+    color: red;
+    font-weight: bold;
+}
+
+.delete-btn {
+    float: right;
+    font-size: 14px;
+    color: white;
+    background-color: #dc3545;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 6px;
+    cursor: pointer;
+}

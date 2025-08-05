@@ -1,0 +1,29 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App - Part 3</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bank app(part-3).css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card text-center p-4 shadow-lg">
+            <h2 class="mb-3">🏦 My Bank App - Advanced</h2>
+
+            <!-- Input Section -->
+            <div class="mb-3">
+                <input type="number" id="amount" class="form-control" placeholder="Enter Amount">
+            </div>
+            <div class="mb-3">
+                <select id="type" class="form-control">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+            <button type="button" onclick="addTransaction()" class="btn btn-primary mb-3">Add Transaction</button>
+            <button type="button" onclick="resetAll()" class="btn btn-danger mb-3">Reset All</button>
+
+            <!-- Balance Display -->
+            <div>
