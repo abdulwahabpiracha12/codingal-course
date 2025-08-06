@@ -1,0 +1,48 @@
+/* -----------------------------
+   1️⃣ Basic Text Color and Font
+------------------------------ */
+p.basic-text {
+    color: darkblue;           /* Changes text color */
+    font-family: Arial;        /* Sets the font style */
+    font-size: 18px;           /* Sets the text size */
+}
+
+/* -----------------------------
+   2️⃣ Bold and Italic Text
+------------------------------ */
+p.styled-text {
+    font-weight: bold;         /* Makes text bold */
+    font-style: italic;        /* Makes text italic */
+}
+
+/* -----------------------------
+   3️⃣ Underline, Overline, Line-through
+------------------------------ */
+p.decorated-text {
+    text-decoration: underline overline; /* Adds underline and overline */
+}
+p.strikethrough-text {
+    text-decoration: line-through;       /* Draws a line through text */
+}
+
+/* -----------------------------
+   4️⃣ Transforming Text
+------------------------------ */
+p.transformed-text {
+    text-transform: uppercase; /* Converts text to uppercase */
+}
+p.capitalize-text {
+    text-transform: capitalize; /* Capitalizes first letter of each word */
+}
+
+/* -----------------------------
+   5️⃣ Spacing and Shadow
+------------------------------ */
+p.spaced-text {
+    letter-spacing: 3px;       /* Space between letters */
+    word-spacing: 10px;        /* Space between words */
+    line-height: 2;            /* Space between lines */
+}
+p.shadow-text {
+    text-shadow: 2px 2px 5px gray; /* Adds shadow to text */
+}
