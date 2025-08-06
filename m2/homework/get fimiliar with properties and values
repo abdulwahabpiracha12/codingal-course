@@ -1,0 +1,38 @@
+/* Background color of the page */
+body {
+    background-color: lightblue;
+}
+
+/* Heading style */
+h1 {
+    color: darkblue;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Paragraph style */
+p {
+    color: green;
+    font-size: 18px;
+    font-style: italic;
+}
+
+/* Box example */
+.box {
+    width: 200px;
+    height: 100px;
+    background-color: yellow;
+    border: 2px solid black;
+    margin: 10px;
+    padding: 5px;
+}
+
+/* Button style */
+button {
+    background-color: orange;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
