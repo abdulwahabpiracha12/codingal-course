@@ -1,0 +1,44 @@
+/* -----------------------------
+   1️⃣ INHERITANCE
+   - Some properties like color and font-family are inherited 
+     by child elements from their parent.
+------------------------------ */
+body {
+    font-family: Arial;
+    color: blue;
+}
+
+/* -----------------------------
+   2️⃣ SPECIFICITY
+   - More specific selectors override less specific ones.
+   - Here, the second rule wins over the first for elements 
+     inside a container class.
+------------------------------ */
+p {
+    color: green;
+}
+
+.container p {
+    color: orange; /* More specific selector overrides 'p' */
+}
+
+/* -----------------------------
+   3️⃣ IMPORTANCE
+   - '!important' overrides all other rules, 
+     even inline styles or higher specificity.
+------------------------------ */
+p.important {
+    color: red !important;
+}
+
+/* -----------------------------
+   4️⃣ SOURCE ORDER (LAST RULE WINS)
+   - When two selectors have same specificity, 
+     the last one in the file takes priority.
+------------------------------ */
+h1 {
+    color: purple;
+}
+h1 {
+    color: brown; /* This wins because it appears last */
+}
