@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Advanced Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6dd5fa, #2980b9);
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            background-color: #fff;
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #004080;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+        button {
+            width: 100%;
+            background-color: #2980b9;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #1f5f8b;
+        }
+        .terms {
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Mun Registration Form</h2>
+        <form>
+            <label>Full Name:</label>
+            <input type="text" name="fullname" placeholder="Enter your full name" required>
+
+            <label>Email Address:</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Create a password" required>
+
+            <label>Gender:</label>
+            <input type="radio" name="gender" value="male"> Male
+            <input type="radio" name="gender" value="female"> Female
+
+            <label>Course Selection:</label>
+            <select name="course">
+                <option value="science">Science</option>
+                <option value="commerce">Commerce</option>
+                <option value="arts">Arts</option>
+                <option value="computer-science">Computer Science</option>
+            </select>
+
+            <label>Address:</label>
+            <textarea name="address" rows="3" placeholder="Enter your address"></textarea>
+
+            <label>
+                <input type="checkbox" required> I agree to the terms and conditions
+            </label>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+</body>
+</html>
