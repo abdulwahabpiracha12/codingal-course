@@ -1,15 +1,17 @@
-# Take input values from user
-x = input("Enter Value of x:")
-y = input("Enter Value of y:")
+# Taking input from the user
+a = input("Enter the first number: ")
+b = input("Enter the second number: ")
+c = input("Enter the third number: ")
 
-# Swapping
-temp = x
-x = y
-y = temp
+print("\nBefore swapping:")
+print("a =", a)
+print("b =", b)
+print("c =", c)
 
-#Single line swap
-#x,y = y,x
+# Swapping the numbers (a -> b, b -> c, c -> a)
+a, b, c = c, a, b
 
-# Displaying results after swapping
-print("value of x after swapping", x)
-print("value of y after swapping", y)
+print("\nAfter swapping:")
+print("a =", a)
+print("b =", b)
+print("c =", c)
