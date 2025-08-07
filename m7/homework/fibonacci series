@@ -1,0 +1,14 @@
+# ✅ Fibonacci Series up to n terms
+
+# Take input from the user
+n = int(input("Enter the number of terms: "))
+
+# First two Fibonacci numbers
+a, b = 0, 1
+
+print("Fibonacci Series:")
+
+# Print the series
+for i in range(n):
+    print(a, end=" ")
+    a, b = b, a + b

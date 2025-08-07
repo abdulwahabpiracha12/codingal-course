@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Style Properties Demo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+
+    <!-- Heading and Text Colors -->
+    <h1 class="text-primary">Bootstrap Text Colors</h1>
+    <p class="text-success">This text is green (success).</p>
+    <p class="text-danger">This text is red (danger).</p>
+    <p class="text-warning">This text is orange (warning).</p>
+    <p class="text-info">This text is blue (info).</p>
+
+    <hr>
+
+    <!-- Background Colors -->
+    <h2 class="text-dark">Background Colors</h2>
+    <div class="bg-primary text-white p-3">Primary Background</div>
+    <div class="bg-success text-white p-3">Success Background</div>
+    <div class="bg-warning text-dark p-3">Warning Background</div>
+    <div class="bg-danger text-white p-3">Danger Background</div>
+
+    <hr>
+
+    <!-- Buttons -->
+    <h2 class="text-dark">Buttons</h2>
+    <button class="btn btn-primary">Primary Button</button>
+    <button class="btn btn-success">Success Button</button>
+    <button class="btn btn-outline-danger">Outline Button</button>
+    <button class="btn btn-warning btn-lg">Large Button</button>
+
+    <hr>
+
+    <!-- Spacing (Margin and Padding) -->
+    <h2 class="text-dark">Spacing Utilities</h2>
+    <div class="bg-light p-4 mb-3">Padding 4 and Margin bottom 3</div>
+    <div class="bg-info p-2 m-5">Padding 2 and Margin 5</div>
+
+    <hr>
+
+    <!-- Borders and Rounded Corners -->
+    <h2 class="text-dark">Borders and Rounding</h2>
+    <div class="border border-primary rounded p-3 mb-3">Rounded Border</div>
+    <div class="border border-danger rounded-circle p-5 text-center" style="width:150px;height:150px;">
+        Circle
+    </div>
+
+    <hr>
+
+    <!-- Shadows -->
+    <h2 class="text-dark">Shadows</h2>
+    <div class="shadow p-3 mb-5 bg-white rounded">Box with shadow effect</div>
+
+    <!-- Alert Box -->
+    <div class="alert alert-success mt-3">This is a success alert message!</div>
+
+</body>
+</html>

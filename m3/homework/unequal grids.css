@@ -1,0 +1,9 @@
+.grid-box {
+    background-color: #4fa3d1;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    border: 2px solid white;
+    font-size: 18px;
+    font-weight: bold;
+}
