@@ -3,40 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank App - Part 2</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Advanced Bank App</title>
     <link rel="stylesheet" href="bank app(part-2).css">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="card text-center p-4 shadow-lg">
-            <h2 class="mb-3">🏦 My Bank App</h2>
-            
-            <div class="mb-3">
-                <input type="number" id="amount" class="form-control" placeholder="Enter Amount">
-            </div>
-            <div class="mb-3">
-                <select id="type" class="form-control">
-                    <option value="income">Income</option>
-                    <option value="expense">Expense</option>
-                </select>
-            </div>
-
-            <button type="button" onclick="addTransaction()" class="btn btn-primary mb-3">Add Transaction</button>
-            <button type="button" onclick="resetAll()" class="btn btn-danger mb-3">Reset All</button>
-            
-            <div class="card p-3 mt-3">
-                <h4>Balance: $<span id="balance">0</span></h4>
-            </div>
-
-            <div class="card p-3 mt-3">
-                <h5>📜 Transaction History</h5>
-                <ul id="history" class="list-group"></ul>
-            </div>
-        </div>
+    <div class="header">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Bank Logo">
+        <h1>Advanced Bank App</h1>
     </div>
 
-    <!-- JavaScript file linked correctly -->
+    <div class="bank-container">
+        <p><strong>Balance:</strong> <span id="balance">0.00</span> PKR</p>
+        <p><strong>Total Expenses:</strong> <span id="expenses">0.00</span> PKR</p>
+
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <div class="buttons">
+            <button id="depositBtn">Deposit</button>
+            <button id="withdrawBtn">Withdraw</button>
+            <button id="clearBtn">Clear History</button>
+        </div>
+
+        <h3>Transaction History</h3>
+        <ul id="history"></ul>
+    </div>
+
+    <!-- JS must be loaded AFTER HTML elements -->
     <script src="bank app(part-2).Js"></script>
 </body>
 </html>

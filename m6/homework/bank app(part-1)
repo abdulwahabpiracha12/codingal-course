@@ -3,32 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank App - Part 1</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Basic Bank App</title>
+    <link rel="stylesheet" href="bank app(part-1).css">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="card text-center p-4 shadow-lg">
-            <h2 class="mb-3">💰 My Bank App</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card p-3 mb-3 bg-success text-white">
-                        <h4>Income</h4>
-                        <p>Rs.5,000</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card p-3 mb-3 bg-danger text-white">
-                        <h4>Expenses</h4>
-                        <p>Rs.2,000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card mt-3 p-3">
-                <h5>Balance: Rs.3,000</h5>
-            </div>
+    <div class="header">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Bank Logo">
+        <h1>Bank App (part-1)</h1>
+    </div>
+
+    <div class="bank-container">
+        <p><strong>Balance:</strong> <span id="balance">0.00</span> PKR</p>
+        <p><strong>Total Expenses:</strong> <span id="expenses">0.00</span> PKR</p>
+
+        <input type="number" id="amount" placeholder="Enter amount">
+        <div class="buttons">
+            <button onclick="deposit()">Deposit</button>
+            <button onclick="withdraw()">Withdraw</button>
         </div>
     </div>
+
+    <script src="bank app(part-1).js"></script>
 </body>
 </html>

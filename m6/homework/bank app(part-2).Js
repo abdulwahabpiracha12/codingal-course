@@ -1,35 +1,55 @@
-let balance = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    let balance = 0;
+    let expenses = 0;
+    let history = [];
 
-function addTransaction() {
-    let amountField = document.getElementById("amount");
-    let amount = parseFloat(amountField.value);
-    let type = document.getElementById("type").value;
+    const balanceEl = document.getElementById("balance");
+    const expensesEl = document.getElementById("expenses");
+    const historyEl = document.getElementById("history");
+    const amountInput = document.getElementById("amount");
 
-    if (!isNaN(amount) && amount > 0) {
-        if (type === "income") {
+    // Deposit
+    document.getElementById("depositBtn").addEventListener("click", function () {
+        const amount = Number(amountInput.value);
+        if (amount > 0) {
             balance += amount;
-            addToHistory(+ $${amount}, "income-item");
+            history.push(Deposited: ${amount.toFixed(2)} PKR);
+            amountInput.value = "";
+            updateUI();
         } else {
-            balance -= amount;
-            addToHistory(- $${amount}, "expense-item");
+            alert("Enter a valid deposit amount.");
         }
-        document.getElementById("balance").innerText = balance;
-        amountField.value = "";
-    } else {
-        alert("Please enter a valid amount!");
+    });
+
+    // Withdraw
+    document.getElementById("withdrawBtn").addEventListener("click", function () {
+        const amount = Number(amountInput.value);
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            expenses += amount;
+            history.push(Withdrew (Expense): ${amount.toFixed(2)} PKR);
+            amountInput.value = "";
+            updateUI();
+        } else {
+            alert("Enter a valid amount or check your balance.");
+        }
+    });
+
+    // Clear history
+    document.getElementById("clearBtn").addEventListener("click", function () {
+        history = [];
+        updateUI();
+    });
+
+    // Update UI function
+    function updateUI() {
+        balanceEl.innerText = balance.toFixed(2);
+        expensesEl.innerText = expenses.toFixed(2);
+        historyEl.innerHTML = "";
+        history.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            historyEl.appendChild(li);
+        });
     }
-}
-
-function addToHistory(text, className) {
-    let list = document.getElementById("history");
-    let item = document.createElement("li");
-    item.textContent = text;
-    item.classList.add("list-group-item", className);
-    list.appendChild(item);
-}
-
-function resetAll() {
-    balance = 0;
-    document.getElementById("balance").innerText = balance;
-    document.getElementById("history").innerHTML = "";
-}
+});
