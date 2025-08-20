@@ -1,0 +1,22 @@
+# Program: Convert tuples into lists and perform union & intersection
+
+# Define two tuples
+tuple1 = (1, 2, 3, 4, 5)
+tuple2 = (4, 5, 6, 7, 8)
+
+print("Tuple 1:", tuple1)
+print("Tuple 2:", tuple2)
+
+# Convert tuples into lists
+list1 = list(tuple1)
+list2 = list(tuple2)
+
+print("\nConverted to List 1:", list1)
+print("Converted to List 2:", list2)
+
+# Perform union and intersection using set
+union_result = list(set(list1) | set(list2))      # or set(list1).union(set(list2))
+intersection_result = list(set(list1) & set(list2))  # or set(list1).intersection(set(list2))
+
+print("\nUnion of List1 and List2:", union_result)
+print("Intersection of List1 and List2:", intersection_result)
