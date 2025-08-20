@@ -1,6 +1,6 @@
 # Base class: Robot
 class Robot:
-    def _init_(self, name, version):
+    def __init__(self, name, version):
         self.name = name
         self.version = version
 
@@ -10,8 +10,8 @@ class Robot:
 
 # Derived class: ChatRobot (inherits from Robot)
 class ChatRobot(Robot):
-    def _init_(self, name, version, language, purpose):
-        super()._init_(name, version)
+    def __init__(self, name, version, language, purpose):
+        super().__init__(name, version)
         self.language = language
         self.purpose = purpose
 
@@ -27,7 +27,7 @@ class ChatRobot(Robot):
 
 # Another class to represent Creator
 class Creator:
-    def _init_(self, organization):
+    def __init__(self, organization):
         self.organization = organization
 
     def introduce_creator(self):
@@ -35,7 +35,7 @@ class Creator:
 
 
 # Main Program
-if _name_ == "_main_":
+if __name__ == "__main__":
     # Create objects
     creator = Creator("OpenAI")
     chatgpt = ChatRobot("ChatGPT", "5.0", "English & many more", "to assist and provide knowledge")
