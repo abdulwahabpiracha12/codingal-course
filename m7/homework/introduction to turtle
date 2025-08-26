@@ -1,0 +1,19 @@
+import turtle
+
+# Set up the screen
+screen = turtle.Screen()
+screen.bgcolor("black")
+
+# Create the turtle
+pen = turtle.Turtle()
+pen.color("yellow")
+pen.pensize(2)
+pen.speed(5)
+
+# Draw a star
+for i in range(5):
+    pen.forward(200)   # move forward
+    pen.right(144)     # turn right to make star shape
+
+# Keep the window open until clicked
+screen.exitonclick()

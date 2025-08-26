@@ -43,6 +43,27 @@ if __name__ == '__main__':
     user_name = input("Welcome to our library! Please enter your name: ")
            
     while True:
-        print(f"\nHello {user_name}, wlcome to the {books.name} library. Please choose an option: ")
+        print(f"\nHello {user_name}, we1lcome to the {books.name} library. Please choose an option: ")
 
         print("1. Display Books\n2. Lend a Book\n3. Add a book\n4. Return a book\n5. Quit")
+        
+        user_choice = input("Enter your choice to continue: ")
+
+        if user_choice not in ['1', '2', '3', '4', '5']:
+            print("Please enter a valid option.")
+            continue
+
+        if user_choice == '1':
+            books.displaybooksisplayBooks()
+        elif user_choice == '2':
+            book = input("Enter the name of the book you want to lend: ")
+            books.lendBook(user_name, book)
+        elif user_choice == '3':
+            book = input("Enter the name of the book you want to add: ")
+            books.addBook(book)
+        elif user_choice == '4':
+            book = input("Enter the name of the book you want to return: ")
+            books.returnBook(book)
+        elif user_choice == '5':
+            print(f"Thank you for using library, {user_name}. Goodbye!")
+            break
