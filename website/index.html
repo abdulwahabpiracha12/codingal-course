@@ -27,7 +27,8 @@
 
   <section class="hero">
      <p>Orimono the choice of 25 million people</p>
-     </section>  
+     <p id="timer"></p>
+  </section>  
 
   <section class="products" id="product-list"></section> 
 
@@ -87,32 +88,38 @@
 
   <footer>
     <p>© 2025 My Shop. All Rights Reserved.</p>
-    <p>For placing order contact on my gmail
-      abdulwahabpiracha15@gmail.com</p>
   </footer>  
 
   <!-- EmailJS script -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     (function() {
-      // ⚡ Already initialized with demo keys (replace with real ones when ready)
-      emailjs.init("QxUqW6mOD7kQyEXAMPLE"); 
+      // ✅ Your real EmailJS public key
+      emailjs.init("NaiXSxupv3BJYt6OY"); 
     })();
 
     function handleSubmit(event) {
       event.preventDefault();
       let form = event.target;
 
-      // Ensure cart details are sent
+      // ✅ Include cart details in hidden field
       document.getElementById("order-details").value = JSON.stringify(cart, null, 2);
 
-      // Send email via EmailJS
-      emailjs.sendForm("service_orimono", "template_order", form)
+      // ✅ Send email with your real service/template IDs
+      emailjs.sendForm("service_x7mqjnb", "template_v3rilkm", form)
         .then(() => {
+          // Hide checkout form
           document.getElementById("checkout-form").style.display = "none";
+
+          // Show thank-you message with confirmation
           document.getElementById("thankyou").style.display = "block";
+          document.getElementById("thankyou").innerHTML = `
+            <h2>✅ Order Confirmed!</h2>
+            <p>Thank you for shopping with Orimono.<br>
+            Your order has been placed successfully. We’ll contact you soon.</p>
+          `;
         }, (error) => {
-          alert("Failed to send order: " + JSON.stringify(error));
+          alert("❌ Failed to send order: " + JSON.stringify(error));
         });
 
       return false;
@@ -207,7 +214,6 @@
 
     window.onload = function() {
       loadProducts();
-      startTimer();
     };
   </script>
 </body>
