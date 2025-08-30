@@ -1,0 +1,39 @@
+class Person:
+    def __init__(self, name, country):
+        self.name = name
+        self.country = country
+
+    def introduce(self):
+        print(f"My name is {self.name} and I am from {self.country}.")
+
+
+class ExpressionSolver:
+    def __init__(self, expression):
+        self.expression = expression
+
+    def solve(self):
+        try:
+            return eval(self.expression)
+        except:
+            return "Invalid Expression"
+
+
+# Main Program
+if __name__ == "__main__":
+    # Take user details
+    user_name = input("Enter your name: ")
+    user_country = input("Enter your country: ")
+
+    # Create a person object
+    person = Person(user_name, user_country)
+    person.introduce()
+
+    # Take expression from user
+    exp = input("Enter an expression to solve: ")
+
+    # Solve expression
+    solver = ExpressionSolver(exp)
+    result = solver.solve()
+
+    # Show result
+    print(f"{person.name} from {person.country} solved the expression '{exp}' and the result is: {result}")
