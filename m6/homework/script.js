@@ -1,90 +1,90 @@
-let balance = 0;
-let transactions = [];
+let users = {
+  "wahab": { pin: "1234", balance: 500, income: 0, expenses: 0, transactions: [] },
+  "ahmed": { pin: "5678", balance: 1000, income: 0, expenses: 0, transactions: [] }
+};
 
-// Add Transaction
-function addTransaction() {
-    let amountField = document.getElementById("amount");
-    let amount = parseFloat(amountField.value);
-    let type = document.getElementById("type").value;
+let currentUser = null;
 
-    if (!isNaN(amount) && amount > 0) {
-        const transaction = {
-            id: Date.now(),
-            amount: amount,
-            type: type,
-            date: new Date().toLocaleString()
-        };
-        transactions.push(transaction);
+function login() {
+  let username = document.getElementById("username").value;
+  let pin = document.getElementById("pin").value;
 
-        // Update balance
-        balance = calculateBalance();
-        updateUI();
-
-        amountField.value = "";
-    } else {
-        alert("Please enter a valid amount!");
-    }
+  if (users[username] && users[username].pin === pin) {
+    currentUser = username;
+    document.getElementById("loginSection").classList.add("hidden");
+    document.getElementById("dashboard").classList.remove("hidden");
+    document.getElementById("userDisplay").textContent = username;
+    updateDashboard();
+  } else {
+    alert("Invalid username or PIN!");
+  }
 }
 
-// Calculate Balance
-function calculateBalance() {
-    let total = 0;
-    transactions.forEach(tx => {
-        total += (tx.type === "income") ? tx.amount : -tx.amount;
-    });
-    return total;
+function updateDashboard() {
+  let user = users[currentUser];
+  document.getElementById("balance").textContent = user.balance.toFixed(2);
+  document.getElementById("income").textContent = user.income.toFixed(2);
+  document.getElementById("expenses").textContent = user.expenses.toFixed(2);
+  document.getElementById("net").textContent = (user.income - user.expenses).toFixed(2);
+
+  let transactionList = document.getElementById("transactionList");
+  transactionList.innerHTML = "";
+  user.transactions.slice().reverse().forEach(t => {
+    let div = document.createElement("div");
+    div.classList.add("transaction");
+    div.textContent = t;
+    transactionList.appendChild(div);
+  });
 }
 
-// Update Transaction List
-function updateUI(filteredList = transactions) {
-    document.getElementById("balance").innerText = balance.toFixed(2);
-    let list = document.getElementById("history");
-    list.innerHTML = "";
-
-    filteredList.forEach(tx => {
-        let item = document.createElement("li");
-        item.classList.add("list-group-item", tx.type === "income" ? "income-item" : "expense-item");
-        item.textContent = ${tx.type === "income" ? '+' : '-'} $${tx.amount.toFixed(2)} | ${tx.date};
-
-        // Delete button
-        let delBtn = document.createElement("button");
-        delBtn.textContent = "Delete";
-        delBtn.classList.add("delete-btn");
-        delBtn.onclick = () => deleteTransaction(tx.id);
-
-        item.appendChild(delBtn);
-        list.appendChild(item);
-    });
+function deposit() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  if (amount > 0) {
+    users[currentUser].balance += amount;
+    users[currentUser].transactions.push(`Deposit: +$${amount}`);
+    updateDashboard();
+  } else {
+    alert("Enter a valid amount");
+  }
 }
 
-// Delete Transaction
-function deleteTransaction(id) {
-    transactions = transactions.filter(tx => tx.id !== id);
-    balance = calculateBalance();
-    updateUI();
+function withdraw() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  if (amount > 0 && amount <= users[currentUser].balance) {
+    users[currentUser].balance -= amount;
+    users[currentUser].transactions.push(`Withdraw: -$${amount}`);
+    updateDashboard();
+  } else {
+    alert("Insufficient balance or invalid amount");
+  }
 }
 
-// Reset All
-function resetAll() {
-    transactions = [];
-    balance = 0;
-    updateUI();
+function addIncome() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  if (amount > 0) {
+    users[currentUser].income += amount;
+    users[currentUser].balance += amount;
+    users[currentUser].transactions.push(`Income: +$${amount}`);
+    updateDashboard();
+  } else {
+    alert("Enter a valid income amount");
+  }
 }
 
-// Filter Transactions
-function filterTransactions() {
-    let filterValue = document.getElementById("filter").value;
-    let filtered = transactions;
-
-    if (filterValue !== "all") {
-        filtered = transactions.filter(tx => tx.type === filterValue);
-    }
-    updateUI(filtered);
+function addExpense() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  if (amount > 0 && amount <= users[currentUser].balance) {
+    users[currentUser].expenses += amount;
+    users[currentUser].balance -= amount;
+    users[currentUser].transactions.push(`Expense: -$${amount}`);
+    updateDashboard();
+  } else {
+    alert("Insufficient balance or invalid expense");
+  }
 }
 
-// Search Transactions
-function searchTransactions() {
-    let searchValue = document.getElementById("search").value.trim();
-    let filtered = transactions.filter(tx => tx.amount.toString().includes(searchValue));
-    updateUI(filtered);
+function logout() {
+  currentUser = null;
+  document.getElementById("loginSection").classList.remove("hidden");
+  document.getElementById("dashboard").classList.add("hidden");
 }
