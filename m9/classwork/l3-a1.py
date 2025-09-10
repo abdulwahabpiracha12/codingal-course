@@ -1,9 +1,9 @@
-
+# write in file using with() function
 with open('codingal.txt', 'w') as file:
     file.write("Hi! I am Penguin and I am 1 yr old.")
 
 
- 
+ # split file into words
 with open('codingal.txt', 'r') as file:
     data = file.readlines()
     print(data)
