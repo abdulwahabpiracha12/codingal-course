@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orimono Store</title>
+  <style>
+    body { margin:0; font-family:Arial, sans-serif; background:#f5f5f5; }
+    header { background:#4cafa7; color:white; padding:15px; text-align:center; }
+    nav { display:flex; justify-content:center; gap:15px; margin-top:10px; }
+    nav a { color:white; text-decoration:none; font-weight:bold; }
+    .container { padding:20px; }
+    .products, .checkout { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+    .card { background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.2); text-align:center; width:250px; }
+    .card img { max-width:100%; border-radius:10px; cursor:pointer; }
+    .card button { margin-top:10px; padding:10px; background:#4cafa7; color:white; border:none; border-radius:5px; cursor:pointer; }
+    .card button:hover { background:#4cafa7; }
+    .checkout { flex-direction:column; max-width:500px; margin:auto; display:none; }
+    .checkout input, .checkout select { width:100%; padding:10px; margin:5px 0; border:1px solid #ccc; border-radius:5px; }
+    .checkout button { margin-top:10px; }
+    #thank-you-message { display:none; text-align:center; margin-top:20px; padding:20px; background:#e6fffa; border:2px solid #38b2ac; border-radius:12px; color:#2c7a7b; font-weight:600; }
+    @media(max-width:600px){ nav{flex-direction:column;} .card{width:100%;} }
+
+    /* Gallery Modal */
+    .gallery-modal{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000;}
+    .gallery-content{position:relative; max-width:90%; max-height:90%;}
+    .gallery-content img{width:100%; max-height:80vh; border-radius:10px;}
+    .close-btn,.prev-btn,.next-btn{position:absolute; top:50%; transform:translateY(-50%); font-size:2em; color:white; cursor:pointer; padding:10px; background:rgba(0,0,0,0.5); border-radius:50%;}
+    .close-btn{top:10px; right:20px; transform:none;}
+    .prev-btn{left:-40px;}
+    .next-btn{right:-40px;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛍 Orimono Store</h1>
+    <nav>
+      <a href="#" onclick="showHome()">Home</a>
+      <a href="#" onclick="showCart()">Cart (<span id="cart-count">0</span>)</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Products -->
+    <div class="products" id="home"></div>
+
+    <!-- Checkout -->
+    <div class="checkout" id="checkout">
+      <h2>Checkout</h2>
+      <div class="order-summary" id="order-summary"></div>
+      <form id="order-form" onsubmit="placeOrder(event)">
+        <label>Full Name:</label>
+        <input type="text" name="user_name" required>
+        <label>Email:</label>
+        <input type="email" name="user_email" required>
+        <label>Phone:</label>
+        <input type="text" name="user_phone" required>
+        <label>Address:</label>
+        <input type="text" name="user_address" required>
+
+        <label>Payment Method:</label>
+        <select name="payment_method" id="payment-method" onchange="togglePaymentBox()" required>
+          <option value="">-- Select --</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="easypaisa">EasyPaisa</option>
+        </select>
+
+        <div class="payment-box" id="easypaisa-box" style="display:none;">
+          <h3>EasyPaisa Payment</h3>
+          <p>Send your amount to:</p>
+          <p><strong>03271406711</strong></p>
+          <p>Upload screenshot:</p>
+          <input type="file" id="screenshot" accept="image/*">
+        </div>
+
+        <input type="hidden" name="order_details" id="order-details-hidden">
+
+        <br>
+        <button type="submit">Place Order</button>
+      </form>
+
+      <div id="thank-you-message">
+        ✅ Thank you! Your order has been placed. We’ll contact you soon.
+      </div>
+      <br>
+      <button onclick="showHome()">⬅ Back to Products</button>
+    </div>
+  </div>
+
+  <!-- Gallery Modal -->
+  <div class="gallery-modal" id="galleryModal">
+    <div class="gallery-content">
+      <span class="close-btn" onclick="closeGallery()">✖</span>
+      <span class="prev-btn" onclick="prevImage()">❮</span>
+      <img id="galleryImage" src="">
+      <span class="next-btn" onclick="nextImage()">❯</span>
+    </div>
+  </div>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    (function(){ emailjs.init("NaiXSxupv3BJYt6OY"); })();
+
+    let cart=[];
+    const products=[
+      { name:"Basket (large)", price:800, images:["Basket(large).jpeg","22","11"] },
+      { name:"Basket (medium)", price:1200, images:["basket(medium.jpeg","11","22"] },
+      { name:"Box", price:1500, images:["Box.jpeg","Box.jpeg","Box.jpeg"] },
+      { name:"Cart", price:800, images:["Cart.jpeg","22","11"] },
+      { name:"Flamingo", price:1200, images:["Flamingo.jpeg","11","22"] },
+      { name:"Glassess", price:1500, images:["Glassess.jpeg","11","22"] },
+      { name:"Honey Bee Tree", price:800, images:["Honey Bee Tree.jpeg","22","11"] },
+      { name:"Pink Flower", price:1200, images:["Pink Flower.jpeg","11","22"] },
+      { name:"Rose Flower", price:1500, images:["Rose Flower.jpeg","11","22"] },
+      { name:"Small Swan (Simple)", price:800, images:["Small Swan(Simple).jpeg","22","11"] },
+      { name:"Snake", price:1200, images:["Snake.jpeg","11","22"] },
+      { name:"Swan Basket", price:1500, images:["Swan Busket.jpeg","11","22"] },
+      { name:"Swan Pencil Holder", price:800, images:["Swan Pencil Holder.jpeg","22","11"] },
+      { name:"Swan (large)", price:1200, images:["Swan(large).jpeg","11","22"] },
+      { name:"Swan (medium)", price:1500, images:["Swan(medium).jpeg","11","22"] },
+      { name:"Tree", price:1500, images:["Tree.jpeg","11","22"] }
+    ];
+
+    // Render products
+    function renderProducts(){
+      const home=document.getElementById("home");
+      home.innerHTML="";
+      products.forEach((p,i)=>{
+        home.innerHTML+=`
+          <div class="card">
+            <img src="${p.images[0]}" alt="${p.name}" onclick="openGallery(${i},0)">
+            <h3>${p.name}</h3>
+            <p>Price: Rs. ${p.price}</p>
+            <button onclick="addToCart('${p.name}',${p.price})">Add to Cart</button>
+          </div>`;
+      });
+    }
+    renderProducts();
+
+    function addToCart(name,price){
+      cart.push({name,price});
+      document.getElementById("cart-count").textContent=cart.length;
+      alert(name+" added to cart!");
+    }
+    function showHome(){ document.getElementById("home").style.display="flex"; document.getElementById("checkout").style.display="none"; }
+
+    function showCart(){
+      if(cart.length===0){ alert("Your cart is empty!"); return; }
+      document.getElementById("home").style.display="none";
+      document.getElementById("checkout").style.display="flex";
+      document.getElementById("order-form").style.display="block"; 
+      document.getElementById("thank-you-message").style.display="none"; 
+
+      let summary="<h3>Your Order:</h3><ul>"; 
+      let details="Order Details:\n"; let total=0;
+      cart.forEach(it=>{ summary+=`<li>${it.name} - Rs. ${it.price}</li>`; details+=`${it.name} - Rs. ${it.price}\n`; total+=it.price; });
+      summary+=`</ul><p><strong>Total: Rs. ${total}</strong></p>`; details+=`Total: Rs. ${total}`;
+      document.getElementById("order-summary").innerHTML=summary;
+      document.getElementById("order-details-hidden").value=details;
+    }
+
+    function togglePaymentBox(){ document.getElementById("easypaisa-box").style.display=(document.getElementById("payment-method").value==="easypaisa")?"block":"none"; }
+
+    function placeOrder(e){
+      e.preventDefault();
+      const form=document.getElementById("order-form");
+      const method=document.getElementById("payment-method").value;
+      if(method==="easypaisa" && !document.getElementById("screenshot").value){ alert("⚠ Please upload EasyPaisa payment screenshot!"); return; }
+      document.getElementById("order-details-hidden").value+=`\nPayment Method: ${method}`;
+
+      emailjs.sendForm("service_x7mqjnb","template_v3rilkm",form).then(()=>{
+        document.getElementById("thank-you-message").style.display="block";
+        document.getElementById("order-form").style.display="none";
+        cart=[]; document.getElementById("cart-count").textContent=0;
+      },(err)=>{ alert("❌ Order could not be sent. "+JSON.stringify(err)); });
+    }
+
+    // Gallery Functions + Swipe
+    let currentProductIndex=0, currentImageIndex=0;
+    function openGallery(pi,ii){ currentProductIndex=pi; currentImageIndex=ii; document.getElementById("galleryModal").style.display="flex"; updateGallery(); }
+    function closeGallery(){ document.getElementById("galleryModal").style.display="none"; }
+    function updateGallery(){ document.getElementById("galleryImage").src=products[currentProductIndex].images[currentImageIndex]; }
+    function nextImage(){ currentImageIndex=(currentImageIndex+1)%products[currentProductIndex].images.length; updateGallery(); }
+    function prevImage(){ currentImageIndex=(currentImageIndex-1+products[currentProductIndex].images.length)%products[currentProductIndex].images.length; updateGallery(); }
+
+    // Swipe support
+    let startX=0; 
+    const galleryModal=document.getElementById("galleryModal");
+    galleryModal.addEventListener("touchstart",e=>{ startX=e.touches[0].clientX; });
+    galleryModal.addEventListener("touchend",e=>{ let endX=e.changedTouches[0].clientX; if(startX-endX>50){ nextImage(); } else if(endX-startX>50){ prevImage(); } });
+  </script>
+</body>
+</html>
