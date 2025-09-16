@@ -1,17 +1,17 @@
+# Prograam to merge two files into a third file
 
 
-
-
-with open('codingal.txt') as fp:
+# Reading data from file1
+with open('CodingalUpdated.txt') as fp:
     data1 = fp.read()
 
-
+# Reading data from file2
 with open(' sample_doc.txt') as fp:
     data2 = fp.read()
 
-
-
-
+# Merging 2 files
+# To add the data of file2
+# from next line
 data1 += "\n"
 data1 += data2
 print("Merging two files....")
