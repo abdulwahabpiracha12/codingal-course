@@ -4,11 +4,11 @@ window = Tk()
 window.title('Tkinterr Sample Window')
 window.geometry('300x300')
 
-
+# Label
 greeting = Label(text="Hello User", fg='black', bg='white')
-
+# Button
 button = Button(text="Click me", bg='black', fg='white')
-
+# Entry
 entry = Entry(fg="yellow", bg="blue", width=100)
 
 greeting.pack()
