@@ -1,8 +1,17 @@
-# open file and store file object in a variable
-file = open('Wahab.txt')
+# Progarm to count number of lines in this file
+# Opening a file
+file = open("Wahab.txt","r")
+Counter = 0
 
-# read the contents of file
-print(file.read())
+# Reading from file
+Content = file.read()
+# splitting content into lines
+# and storing them in a list
+Colist = Content.split("\n")
+print(Colist)
+for i in Colist:
+    if i:
+        Counter += 1
 
-# close the file
-file.close()
+print("This is the number of lines in the file")
+print(Counter)
