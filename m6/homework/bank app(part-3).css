@@ -1,66 +1,77 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(to right, #43cea2, #185a9d);
-    margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-.header {
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+.app {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-.header img {
-    width: 50px;
+h1 {
+  margin-bottom: 10px;
 }
 
-.bank-container {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
-    width: 350px;
-    margin: 50px auto;
-    box-shadow: 0px 5px 20px rgba(0,0,0,0.2);
+.balance h2 {
+  margin: 10px 0;
+  color: #333;
 }
 
-input {
-    padding: 10px;
-    width: 80%;
-    margin: 10px 0;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+.transaction-form {
+  margin: 15px 0;
 }
 
-.buttons button {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
+.transaction-form input,
+.transaction-form select {
+  padding: 8px;
+  margin: 5px;
+  width: 100px;
 }
 
-#depositBtn { background: #4CAF50; }
-#withdrawBtn { background: #E74C3C; }
-#clearBtn { background: #3498DB; }
-
-button:hover {
-    opacity: 0.85;
+.transaction-form button {
+  padding: 8px 15px;
+  border: none;
+  background: green;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    text-align: left;
+.transaction-form button:hover {
+  background: darkgreen;
 }
 
-li {
-    padding: 5px;
-    border-bottom: 1px solid #ddd;
+.summary {
+  margin: 15px 0;
+  text-align: left;
+}
+
+#transactions {
+  list-style: none;
+  padding: 0;
+}
+
+#transactions li {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 6px;
+}
+
+.income {
+  background: #d4f5d4;
+  color: green;
+}
+
+.expense {
+  background: #f8d7da;
+  color: red;
 }

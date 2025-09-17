@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Bank App</title>
-    <link rel="stylesheet" href="bank app(part-2).css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank App - Income & Expense</title>
+  <link rel="stylesheet" href="bank app(part-3).css">
 </head>
 <body>
-    <div class="header">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Bank Logo">
-        <h1>Bank App</h1>
+  <div class="app">
+    <h1>💰 Bank App</h1>
+
+    <div class="balance">
+      <h2>Balance: <span id="balance">0</span> PKR</h2>
     </div>
 
-    <div class="bank-container">
-        <p><strong>Balance:</strong> <span id="balance">0.00</span> PKR</p>
-        <p><strong>Total Expenses:</strong> <span id="expenses">0.00</span> PKR</p>
-
-        <input type="number" id="amount" placeholder="Enter amount">
-
-        <div class="buttons">
-            <button id="depositBtn">Deposit</button>
-            <button id="withdrawBtn">Withdraw</button>
-            <button id="clearBtn">Clear History</button>
-        </div>
-
-        <h3>Transaction History</h3>
-        <ul id="history"></ul>
+    <div class="transaction-form">
+      <input type="number" id="amount" placeholder="Enter amount">
+      <select id="type">
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
+      <button onclick="addTransaction()">Add</button>
     </div>
 
-    <!-- JS must be loaded AFTER HTML elements -->
-    <script src="bank app(part-2).Js"></script>
+    <div class="summary">
+      <p>Income: <span id="income">0</span> PKR</p>
+      <p>Expense: <span id="expense">0</span> PKR</p>
+    </div>
+
+    <h3>Transactions</h3>
+    <ul id="transactions"></ul>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
