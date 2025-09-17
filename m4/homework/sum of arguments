@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trig Sum Calculator</title>
+</head>
+<body>
+  <h2>Trigonometric Sum Calculator (Degrees)</h2>
+  <p>Enter values like: <b>sin(30), cos(60), tan(45)</b></p>
+
+  <input type="text" id="userInput" placeholder="Enter trig values">
+  <button onclick="calculateSum()">Calculate Sum</button>
+
+  <h3>Result: <span id="result"></span></h3>
+
+  <script>
+    // Convert degrees to radians
+    function degToRad(deg) {
+      return deg * Math.PI / 180;
+    }
+
+    function calculateSum() {
+      let input = document.getElementById("userInput").value;
+      let items = input.split(",");
+      let sum = 0;
+
+      items.forEach(item => {
+        item = item.trim().toLowerCase();
+        let value = 0;
+
+        if (item.startsWith("sin(") && item.endsWith(")")) {
+          let angle = parseFloat(item.slice(4, -1));
+          value = Math.sin(degToRad(angle));
+        } 
+        else if (item.startsWith("cos(") && item.endsWith(")")) {
+          let angle = parseFloat(item.slice(4, -1));
+          value = Math.cos(degToRad(angle));
+        } 
+        else if (item.startsWith("tan(") && item.endsWith(")")) {
+          let angle = parseFloat(item.slice(4, -1));
+          value = Math.tan(degToRad(angle));
+        } 
+
+        sum += value;
+      });
+
+      document.getElementById("result").innerText = sum;
+    }
+  </script>
+</body>
+</html>
