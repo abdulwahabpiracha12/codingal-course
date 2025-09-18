@@ -1,6 +1,5 @@
 import random
 import tkinter as tk
-from tkinter import messagebox
 
 # Function to determine winner
 def check_winner(user_choice, comp_choice):
@@ -17,21 +16,23 @@ def check_winner(user_choice, comp_choice):
 def play(user_choice):
     comp_choice = random.choice(["Rock", "Paper", "Scissors"])
     result = check_winner(user_choice, comp_choice)
-    messagebox.showinfo("Result", f"Your Choice: {user_choice}\nComputer's Choice: {comp_choice}\n\n{result}")
+    result_label.config(
+        text=f"Your Choice: {user_choice}\nComputer's Choice: {comp_choice}\n\nResult: {result}"
+    )
 
 # Main window
 root = tk.Tk()
 root.title("Rock, Paper, Scissors Game")
-root.geometry("400x300")
+root.geometry("400x350")
 root.config(bg="#1e1e1e")
 
 # Heading
 heading = tk.Label(root, text="Rock, Paper, Scissors", font=("Arial", 16, "bold"), fg="white", bg="#1e1e1e")
-heading.pack(pady=20)
+heading.pack(pady=15)
 
 # Buttons
 btn_frame = tk.Frame(root, bg="#1e1e1e")
-btn_frame.pack(pady=30)
+btn_frame.pack(pady=15)
 
 rock_btn = tk.Button(btn_frame, text="Rock", font=("Arial", 14), width=10, command=lambda: play("Rock"))
 rock_btn.grid(row=0, column=0, padx=10)
@@ -42,9 +43,13 @@ paper_btn.grid(row=0, column=1, padx=10)
 scissors_btn = tk.Button(btn_frame, text="Scissors", font=("Arial", 14), width=10, command=lambda: play("Scissors"))
 scissors_btn.grid(row=0, column=2, padx=10)
 
+# Result Label (shows output)
+result_label = tk.Label(root, text="", font=("Arial", 14), fg="yellow", bg="#1e1e1e", justify="center")
+result_label.pack(pady=20)
+
 # Exit button
 exit_btn = tk.Button(root, text="Exit", font=("Arial", 12), width=10, command=root.quit, bg="red", fg="white")
-exit_btn.pack(pady=20)
+exit_btn.pack(pady=10)
 
 # Run GUI loop
 root.mainloop()
