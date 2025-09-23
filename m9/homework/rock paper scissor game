@@ -1,0 +1,53 @@
+import random
+import tkinter as tk
+
+# Function to determine winner
+def check_winner(user_choice, comp_choice):
+    if user_choice == comp_choice:
+        return "It's a Tie!"
+    elif (user_choice == "Rock" and comp_choice == "Scissors") or \
+         (user_choice == "Paper" and comp_choice == "Rock") or \
+         (user_choice == "Scissors" and comp_choice == "Paper"):
+        return "You Win!"
+    else:
+        return "Computer Wins!"
+
+# Function for user's move
+def play(user_choice):
+    comp_choice = random.choice(["Rock", "Paper", "Scissors"])
+    result = check_winner(user_choice, comp_choice)
+
+    # Print result in terminal
+    print(f"Your Choice: {user_choice}")
+    print(f"Computer's Choice: {comp_choice}")
+    print(f"Result: {result}")
+    print("-" * 30)  # separator for readability
+
+# Main window
+root = tk.Tk()
+root.title("Rock, Paper, Scissors Game")
+root.geometry("400x300")
+
+# Heading
+heading = tk.Label(root, text="Rock, Paper, Scissors", font=("Arial", 16, "bold"))
+heading.pack(pady=20)
+
+# Buttons
+btn_frame = tk.Frame(root)
+btn_frame.pack(pady=30)
+
+rock_btn = tk.Button(btn_frame, text="Rock", font=("Arial", 14), width=10, command=lambda: play("Rock"))
+rock_btn.grid(row=0, column=0, padx=10)
+
+paper_btn = tk.Button(btn_frame, text="Paper", font=("Arial", 14), width=10, command=lambda: play("Paper"))
+paper_btn.grid(row=0, column=1, padx=10)
+
+scissors_btn = tk.Button(btn_frame, text="Scissors", font=("Arial", 14), width=10, command=lambda: play("Scissors"))
+scissors_btn.grid(row=0, column=2, padx=10)
+
+# Exit button
+exit_btn = tk.Button(root, text="Exit", font=("Arial", 12), width=10, command=root.quit, bg="red", fg="white")
+exit_btn.pack(pady=20)
+
+# Run GUI loop
+root.mainloop()
