@@ -1,0 +1,78 @@
+/* Links styling with pseudo-classes */
+a:link {
+  color: blue;
+  text-decoration: none;
+}
+
+a:visited {
+  color: purple;
+}
+
+a:hover {
+  color: red;
+  text-decoration: underline;
+}
+
+a:active {
+  color: orange;
+}
+
+/* List items */
+li:first-child {
+  font-weight: bold;
+  color: green;
+}
+
+li:last-child {
+  font-style: italic;
+  color: brown;
+}
+
+li:nth-child(odd) {
+  background-color: #f0f0f0;
+}
+
+li:nth-child(even) {
+  background-color: #d0d0d0;
+}
+
+/* Input fields */
+input:focus {
+  border: 2px solid blue;
+  outline: none;
+  background-color: #eef;
+}
+
+input:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Pseudo-elements */
+p::first-letter {
+  font-size: 2em;
+  color: crimson;
+}
+
+p::first-line {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h1::before {
+  content: "★ ";
+  color: gold;
+}
+
+h1::after {
+  content: " ★";
+  color: gold;
+}
+
+/* Empty elements */
+div:empty {
+  background: lightgray;
+  height: 30px;
+  width: 100px;
+  border: 1px dashed #333;
+}
