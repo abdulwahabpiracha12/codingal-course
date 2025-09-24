@@ -1,0 +1,10 @@
+# Efficient method (direct multiplication)
+def multiply_efficient(n, m):
+    return n * m
+
+# Inefficient method (repeated addition using for i in range)
+def multiply_inefficient(n, m):
+    result = 0
+    for i in range(n):
+        result += m
+    return result
