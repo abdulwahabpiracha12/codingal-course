@@ -1,0 +1,11 @@
+# Ask user for function name and expression
+func = input("Enter the function name (e.g. T): ")
+n = input("Enter the variable (e.g. n): ")
+
+# Ask for recursive part and work done outside recursion
+rec_part = input("Enter recursive part (e.g. 2*T(n/2)): ")
+work_part = input("Enter non-recursive work (e.g. n or 1): ")
+
+# Print the recurrence relation
+print("\nRecurrence Relation:")
+print(f"{func}({n}) = {rec_part} + {work_part}")

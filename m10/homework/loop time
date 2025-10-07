@@ -1,0 +1,16 @@
+code = """
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+"""
+
+# count loops
+loops = code.count("for") + code.count("while")
+
+# simple conditions
+if "for" in code and code.count("for") > 1:
+    print("Time Complexity: O(n^2)")
+elif "for" in code or "while" in code:
+    print("Time Complexity: O(n)")
+else:
+    print("Time Complexity: O(1)")
