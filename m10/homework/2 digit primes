@@ -1,0 +1,16 @@
+# Program to find all prime numbers from 10 to user-given number
+
+# Take input from the user
+end = int(input("Enter the ending number: "))
+
+print(f"Prime numbers between 10 and {end} are:")
+
+# Loop through numbers from 10 to the given end number
+for num in range(10, end + 1):
+    if num > 1:
+        # Check if the number is prime
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                break
+        else:
+            print(num)
