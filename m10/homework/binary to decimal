@@ -1,0 +1,28 @@
+# Advanced Python program to convert Binary to Decimal
+
+# Function to check if input is valid binary
+def is_binary(num):
+    for digit in num:
+        if digit not in ['0', '1']:
+            return False
+    return True
+
+# Function to convert binary to decimal manually
+def binary_to_decimal(binary):
+    decimal = 0
+    power = 0
+    for digit in binary[::-1]:  # reverse the binary string
+        decimal += int(digit) * (2 ** power)
+        power += 1
+    return decimal
+
+# Main program
+binary = input("Enter a binary number: ")
+
+# Check if input is valid
+if is_binary(binary):
+    decimal = binary_to_decimal(binary)
+    print(f"\nBinary number: {binary}")
+    print(f"Decimal (Denary) number: {decimal}")
+else:
+    print("❌ Invalid input! Please enter only 0s and 1s.")
