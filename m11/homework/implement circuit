@@ -1,0 +1,16 @@
+# Take binary inputs from user
+bin1 = input("Enter first binary number: ")
+bin2 = input("Enter second binary number: ")
+
+# Convert binary to decimal
+num1 = int(bin1, 2)
+num2 = int(bin2, 2)
+
+# Multiply the numbers
+result = num1 * num2
+
+# Convert result back to binary
+binary_result = bin(result)[2:]
+
+# Show result in binary
+print("The result in binary is:", binary_result)

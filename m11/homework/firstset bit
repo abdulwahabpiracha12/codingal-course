@@ -1,0 +1,29 @@
+# Program to right shift a binary number
+
+# Ask the user to enter a binary number
+binary_num = input("Enter a binary number: ")
+
+# If user enters nothing (some mobile IDEs skip input), use a default
+if binary_num == "":
+    binary_num = "101100"
+    print("No input detected, using default binary:", binary_num)
+
+# Convert binary to decimal
+num = int(binary_num, 2)
+
+# Ask how many times to shift right
+shift_input = input("Enter how many times to shift right: ")
+if shift_input == "":
+    shift_input = "2"
+    print("No shift input detected, using default shift:", shift_input)
+
+shift = int(shift_input)
+
+# Perform right shift
+shifted_num = num >> shift
+
+# Convert back to binary
+shifted_binary = bin(shifted_num)[2:]
+
+# Show only binary result
+print("After shifting right", shift, "times, binary is:", shifted_binary)
