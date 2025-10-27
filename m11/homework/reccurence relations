@@ -1,0 +1,32 @@
+# Program to print recurrence relation of a recursive function
+
+print("Choose a recursive function type:")
+print("1. Factorial")
+print("2. Fibonacci")
+print("3. Binary Search")
+print("4. Tower of Hanoi")
+
+choice = int(input("Enter your choice (1-4): "))
+
+if choice == 1:
+    print("\nRecursive Function: Factorial(n)")
+    print("Recurrence Relation: T(n) = T(n-1) + c")
+    print("Base Case: T(1) = c")
+
+elif choice == 2:
+    print("\nRecursive Function: Fibonacci(n)")
+    print("Recurrence Relation: T(n) = T(n-1) + T(n-2) + c")
+    print("Base Case: T(1) = T(0) = c")
+
+elif choice == 3:
+    print("\nRecursive Function: Binary Search")
+    print("Recurrence Relation: T(n) = T(n/2) + c")
+    print("Base Case: T(1) = c")
+
+elif choice == 4:
+    print("\nRecursive Function: Tower of Hanoi")
+    print("Recurrence Relation: T(n) = 2T(n-1) + c")
+    print("Base Case: T(1) = c")
+
+else:
+    print("\nInvalid choice! Please enter a number between 1 and 4.")
