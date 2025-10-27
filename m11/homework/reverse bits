@@ -1,0 +1,15 @@
+# Program to reverse all bits in a number
+
+# Take input from user
+num = int(input("Enter a number: "))
+
+# Find the number of bits in binary representation
+bits = num.bit_length()
+
+# Reverse the bits using string slicing
+reversed_num = int(bin(num)[2:].zfill(bits)[::-1], 2)
+
+print("Original number:", num)
+print("Binary form:", bin(num)[2:])
+print("Reversed bits number:", reversed_num)
+print("Binary after reversing:", bin(reversed_num)[2:])
