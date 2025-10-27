@@ -1,0 +1,21 @@
+# Program to calculate and print the time complexity of a given code snippet
+
+code = input("Enter your code snippet: ").lower()
+
+# Basic checks for time complexity patterns
+if "for" in code and "while" not in code:
+    print("\nThe time complexity is: O(n)")
+elif "for" in code and "while" in code:
+    print("\nThe time complexity is: O(n^2)")
+elif "while" in code and "n = n // 2" in code:
+    print("\nThe time complexity is: O(log n)")
+elif "recursion" in code or "def" in code and "(" in code and ")" in code:
+    if "return" in code and "f(" in code and "f(n-1)" in code and "f(n-2)" in code:
+        print("\nThe time complexity is: O(2^n)")
+    elif "return" in code and "f(" in code and "f(n-1)" in code:
+        print("\nThe time complexity is: O(n)")
+    else:
+        print("\nThe time complexity seems recursive but cannot be determined precisely.")
+else:
+    print("\nCannot determine time complexity from the given snippet.")
+    
