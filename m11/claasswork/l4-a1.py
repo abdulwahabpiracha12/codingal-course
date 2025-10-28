@@ -9,3 +9,7 @@ if power2(n):
    print("\nThe number is a power of 2")
 else:
    print("\nThe number is not a poweer 2")
+
+
+# 4 = 100
+# 100 & 011 = 000
