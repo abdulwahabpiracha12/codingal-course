@@ -1,0 +1,19 @@
+# Program to check if a number is a power of 8
+
+# Taking input from the user
+num = int(input("Enter a number: "))
+
+# Checking if number is greater than 0
+if num > 0:
+    # Keep dividing the number by 8
+    while num % 8 == 0:
+        num = num // 8
+
+    # If after dividing, we get 1, it is a power of 8
+    if num == 1:
+        print("Yes, it is a power of 8.")
+    else:
+        print("No, it is not a power of 8.")
+else:
+    print("Please enter a positive number.")
+    
