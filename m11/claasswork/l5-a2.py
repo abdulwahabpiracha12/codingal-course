@@ -10,7 +10,7 @@ def divide(ourdividend, ourDivisor):
   for i in range(31, -1, -1):
     if (tempNumber + (ourDivisor << i) <= ourdividend):
       tempNumber += ourDivisor << i
-      qoutientNumber |= 1 << i
+      quotientNumber |= 1 << i
 
   if sign == -1:
     quotientNumber = -quotientNumber
@@ -20,3 +20,5 @@ def divide(ourdividend, ourDivisor):
 a = int(input("Enter a for a/b: "))
 b = int(input("Enter b for a/b: "))
 print("Result of", a, "/", b, "is", divide(a, b))
+
+# 
