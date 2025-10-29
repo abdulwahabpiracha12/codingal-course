@@ -20,5 +20,3 @@ def divide(ourdividend, ourDivisor):
 a = int(input("Enter a for a/b: "))
 b = int(input("Enter b for a/b: "))
 print("Result of", a, "/", b, "is", divide(a, b))
-
-# 
