@@ -1,0 +1,18 @@
+num = int(input("Enter a number: "))
+
+# Convert number to binary (remove '0b' part)
+binary = bin(num)[2:]
+
+count = 0
+max_count = 0
+
+# Count consecutive 1's
+for digit in binary:
+    if digit == '1':
+        count += 1
+        max_count = max(max_count, count)
+    else:
+        count = 0
+
+print("Binary Representation:", binary)
+print("Longest Consecutive 1's:", max_count)
