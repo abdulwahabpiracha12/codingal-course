@@ -8,7 +8,7 @@ def printPowerSet(set, SetSize):
 
     for outer in range(0, PowerSetSize):
         print("{", end = "")
-        for i in range(0, SetSize):
+        for inner in range(0, SetSize):
 
 
             if((outer & (1 << inner)) > 0):
