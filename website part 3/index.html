@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orimono Store</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f0f4f8;color:#333;}
+header{background:linear-gradient(90deg,#42aabd,#0d6e80);color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 3px 6px rgba(0,0,0,0.1);}
+header h1{font-size:1.8rem;font-weight:bold;}
+header a{background:white;color:#46a5e5;padding:0.5rem 1rem;border-radius:6px;transition:0.3s;cursor:pointer;}
+header a:hover{background:#e0f5ff;}
+.container{max-width:1200px;margin:auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;}
+.product-card{background:white;border-radius:12px;padding:1rem;box-shadow:0 4px 8px rgba(0,0,0,0.05);transition:0.3s;cursor:pointer;position:relative;overflow:hidden;}
+.product-card:hover{box-shadow:0 6px 12px rgba(0,0,0,0.1);transform:translateY(-5px);}
+.product-card img{width:100%;height:200px;object-fit:cover;border-radius:8px;transition:0.3s;}
+.product-card img:hover{transform:scale(1.05);}
+.product-card h2{margin:0.5rem 0;font-size:1.2rem;color:#1e293b;transition:0.3s;}
+.product-card p{color:#46a5e5;font-weight:bold;font-size:1.1rem;}
+.product-card button{margin-top:0.5rem;width:100%;padding:0.5rem;background:#0d6e80;color:white;border:none;border-radius:6px;cursor:pointer;transition:0.3s;}
+.product-card button:hover{background:#3b82f6;}
+#product-detail,#cart-section{display:none;}
+.detail-container,.cart-container{max-width:800px;margin:2rem auto;background:white;padding:2rem;border-radius:12px;box-shadow:0 6px 12px rgba(0,0,0,0.1);}
+.carousel{position:relative;margin-bottom:1rem;}
+.carousel img{width:100%;height:300px;object-fit:cover;border-radius:12px;transition:0.3s;}
+.carousel button{position:absolute;top:50%;transform:translateY(-50%);background:#4686e5;border:none;color:white;font-size:1.5rem;padding:0.5rem 1rem;cursor:pointer;border-radius:50%;}
+.carousel .prev{left:10px;}
+.carousel .next{right:10px;}
+h2{margin:0.5rem 0;color:#1e293b;}
+p.price{color:#4686e5;font-weight:bold;font-size:1.2rem;margin-bottom:1rem;}
+button.add-cart{background:#4686e5;color:white;border:none;padding:0.5rem 1rem;border-radius:6px;width:100%;cursor:pointer;transition:0.3s;}
+button.add-cart:hover{background: #4686e6;;}
+label{font-weight:bold;}
+input[type=number]{width:60px;margin-left:5px;padding:0.3rem;border-radius:6px;border:1px solid #cbd5e1;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid #e5e7eb;}
+.cart-item button{margin-left:10px;background:#c72c2c;border:none;color:white;padding:0.2rem 0.5rem;border-radius:6px;cursor:pointer;}
+form input, form select, form button{width:100%;padding:0.6rem;margin-bottom:1rem;border-radius:6px;border:1px solid #cbd5e1;}
+form button{background:#46abe5;color:white;border:none;cursor:pointer;font-weight:bold;transition:0.3s;}
+form button:hover{background:#3babf6;}
+#popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#4686e5;color:white;padding:2rem;border-radius:12px;display:none;z-index:1000;animation:fadeIn 0.5s;}
+.fly-img{position:absolute;width:50px;height:50px;object-fit:cover;border-radius:50%;z-index:1000;transition:all 0.8s ease-in-out;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+<header>
+<h1>Orimono Shopping Store</h1>
+<a onclick="showSection('home')">Home</a>
+<a onclick="showSection('cart')">Cart</a>
+</header>
+
+<!-- Home Section -->
+<div class="container" id="home"></div>
+
+<!-- Product Detail Section -->
+<div id="product-detail" class="detail-container">
+<div class="carousel">
+<img id="detail-img" src="" alt="Product Image">
+<button class="prev" onclick="prevImage()">&#10094;</button>
+<button class="next" onclick="nextImage()">&#10095;</button>
+</div>
+<h2 id="detail-name"></h2>
+<p class="price" id="detail-price"></p>
+<label>Quantity:<input type="number" id="detail-qty" value="1" min="1"></label>
+<button class="add-cart" onclick="addToCartDetail()">Add to Cart</button>
+</div>
+
+<!-- Cart Section -->
+<div id="cart-section" class="cart-container">
+<h2>Your Cart</h2>
+<div id="cart-items"></div>
+<form id="checkout-form">
+<input type="text" id="name" placeholder="Name" required>
+<input type="text" id="phone" placeholder="Phone Number" required>
+<input type="text" id="address" placeholder="Address" required>
+<select id="payment" required>
+<option value="">Select Payment Method</option>
+<option value="EasyPaisa">EasyPaisa</option>
+<option value="Cash on Delivery">Cash on Delivery</option>
+</select>
+<input type="file" id="screenshot" accept="image/*">
+<p id="total-amount" style="font-weight:bold;"></p>
+<button type="submit">Place Order</button>
+</form>
+</div>
+
+<div id="popup">Your order is confirmed successfully! Thank you for shopping with Orimono.</div>
+
+<script>
+emailjs.init("NaiXSxupv3BJYt6OY");
+
+const products=[
+{name:"Basket (large)", price:750, images:["Basket(large).jpeg","22","11"]},
+{name:"Basket (medium)", price:600, images:["basket(medium.jpeg","11","22"]},
+{name:"Box", price:650, images:["Box.jpeg","Box.jpeg","Box.jpeg"]},
+{name:"Cart", price:1650, images:["Cart.jpeg","22","11"]},
+{name:"Flamingo", price:800, images:["Flamingo.jpeg","11","22"]},
+{name:"Glassess", price:1500, images:["Glassess.jpeg","11","22"]},
+{name:"Honey Bee Tree", price:650, images:["Honey Bee Tree.jpeg","22","11"]},
+{name:"Pink Flower", price:550, images:["Pink Flower.jpeg","11","22"]},
+{name:"Rose Flower", price:600, images:["Rose Flower.jpeg","11","22"]},
+{name:"Small Swan (Simple)", price:250, images:["Small Swan(Simple).jpeg","22","11"]},
+{name:"Snake", price:1000, images:["Snake.jpeg","11","22"]},
+{name:"Swan Basket", price:400, images:["Swan Busket.jpeg","11","22"]},
+{name:"Swan Pencil Holder", price:500, images:["Swan Pencil Holder.jpeg","22","11"]},
+{name:"Swan (large)", price:1260, images:["Swan(large).jpeg","11","22"]},
+{name:"Swan (medium)", price:800, images:["Swan(medium).jpeg","11","22"]},
+{name:"Tree", price:500, images:["Tree.jpeg","11","22"]}
+];
+
+// Build homepage
+const home=document.getElementById("home");
+products.forEach((p,i)=>{
+let div=document.createElement("div");
+div.className="product-card";
+div.innerHTML=`<img src="${p.images[0]}" alt="${p.name}">
+<h2>${p.name}</h2>
+<p>PKR ${p.price}</p>
+<button onclick="viewProduct(${i})">View Details</button>`;
+home.appendChild(div);
+});
+
+// Section switch
+function showSection(section){
+document.getElementById("home").style.display=(section==='home')?'grid':'none';
+document.getElementById("product-detail").style.display=(section==='product')?'block':'none';
+document.getElementById("cart-section").style.display=(section==='cart')?'block':'none';
+updateCart();
+}
+
+// Product detail
+let selectedProduct=null;
+let currentImage=0;
+function viewProduct(index){
+selectedProduct=products[index];
+currentImage=0;
+document.getElementById("detail-img").src=selectedProduct.images[currentImage];
+document.getElementById("detail-name").innerText=selectedProduct.name;
+document.getElementById("detail-price").innerText="PKR "+selectedProduct.price;
+document.getElementById("detail-qty").value=1;
+showSection('product');
+}
+function prevImage(){currentImage=(currentImage-1+selectedProduct.images.length)%selectedProduct.images.length;document.getElementById("detail-img").src=selectedProduct.images[currentImage];}
+function nextImage(){currentImage=(currentImage+1)%selectedProduct.images.length;document.getElementById("detail-img").src=selectedProduct.images[currentImage];}
+
+// Fly-to-cart animation
+function flyToCart(imgElement){
+let flyImg=document.createElement("img");
+flyImg.src=imgElement.src;
+flyImg.className="fly-img";
+document.body.appendChild(flyImg);
+let rect=imgElement.getBoundingClientRect();
+flyImg.style.left=rect.left+"px";
+flyImg.style.top=rect.top+"px";
+let cartBtn=document.querySelector("header a:nth-child(2)");
+let cartRect=cartBtn.getBoundingClientRect();
+setTimeout(()=>{
+flyImg.style.left=cartRect.left+"px";
+flyImg.style.top=cartRect.top+"px";
+flyImg.style.width="30px";
+flyImg.style.height="30px";
+},10);
+setTimeout(()=>{flyImg.remove();},800);
+}
+
+function addToCartDetail(){
+let qty=parseInt(document.getElementById("detail-qty").value)||1;
+let cart=JSON.parse(localStorage.getItem('cart'))||[];
+cart.push({...selectedProduct, quantity:qty});
+localStorage.setItem('cart',JSON.stringify(cart));
+flyToCart(document.getElementById("detail-img"));
+updateCart();
+}
+
+// Cart
+function updateCart(){
+let cart=JSON.parse(localStorage.getItem('cart'))||[];
+let container=document.getElementById("cart-items");
+container.innerHTML="";
+let total=0;
+cart.forEach((item,index)=>{
+total+=item.price*item.quantity;
+let div=document.createElement("div");
+div.className="cart-item";
+div.innerHTML=`<span>${item.name} x ${item.quantity}</span><span>PKR ${item.price*item.quantity}</span><button onclick="removeItem(${index})">Remove</button>`;
+container.appendChild(div);
+});
+document.getElementById("total-amount").innerText="Total Amount: PKR "+total;
+}
+function removeItem(index){
+let cart=JSON.parse(localStorage.getItem('cart'))||[];
+cart.splice(index,1);
+localStorage.setItem('cart',JSON.stringify(cart));
+updateCart();
+}
+
+// Checkout
+document.getElementById("checkout-form").addEventListener("submit",function(e){
+e.preventDefault();
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+let address=document.getElementById("address").value;
+let payment=document.getElementById("payment").value;
+let screenshot=document.getElementById("screenshot").files[0];
+let cart=JSON.parse(localStorage.getItem('cart'))||[];
+
+if(payment==="EasyPaisa" && !screenshot){alert("Please upload screenshot for EasyPaisa!");return;}
+
+let formData={name,phone,address,payment,items:JSON.stringify(cart)};
+emailjs.send('service_x7mqjnb','template_v3rilkm',formData)
+.then(()=>{
+document.getElementById("popup").style.display="block";
+setTimeout(()=>{document.getElementById("popup").style.display="none";},4000);
+localStorage.removeItem("cart");
+updateCart();
+document.getElementById("checkout-form").reset();
+showSection('home');
+})
+.catch(()=>alert("Failed to send order!"));
+});
+
+// Init
+showSection('home');
+</script>
+</body>
+</html>
