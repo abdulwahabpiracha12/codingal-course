@@ -1,0 +1,9 @@
+# Program to print all substrings of a string
+
+# User will give input
+string = input("Enter any string: ")
+
+print("\nAll Substrings are:")
+for i in range(len(string)):
+    for j in range(i+1, len(string)+1):
+        print(string[i:j])
