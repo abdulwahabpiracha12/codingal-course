@@ -1,0 +1,29 @@
+-- Create the table
+CREATE TABLE IF NOT EXISTS People (
+  person_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  city TEXT,
+  age INTEGER
+);
+
+-- Insert records
+INSERT INTO People (name, city, age) VALUES
+  ('Abdulwahab', 'Karachi', 20),
+  ('Babar Azam', 'Lahore', 29),
+  ('Ahmed', 'Islamabad', 22),
+  ('Osman', 'Rawalpindi', 21),
+  ('Saim Ayub', 'Karachi', 21);
+
+-- Display all records
+SELECT * FROM People;
+
+-- Select people from Karachi
+SELECT * FROM People
+WHERE city = 'Karachi';
+
+-- Select people younger than 25
+SELECT * FROM People
+WHERE age < 25;
+
+-- Display only names from table
+SELECT name FROM People;
