@@ -1,0 +1,54 @@
+-- Creating the table
+CREATE TABLE Players (
+    player_id INTEGER PRIMARY KEY,
+    player_name TEXT,
+    runs INTEGER,
+    matches INTEGER
+);
+
+-- Inserting records (Your given names + Extra players)
+INSERT INTO Players (player_id, player_name, runs, matches) VALUES
+(1, 'Babar Azam', 5400, 115),
+(2, 'Saim Ayub', 900, 40),
+(3, 'Osman', 1500, 60),
+(4, 'Azan', 700, 25),
+(5, 'Ahmed', 1100, 50),
+(6, 'Abdulwahab', 500, 20),
+(7, 'Shadab Khan', 1500, 90),
+(8, 'Shaheen Afridi', 350, 55),
+(9, 'Rizwan', 3200, 100),
+(10, 'Haris Rauf', 200, 35),
+(11, 'Imad Wasim', 1400, 70),
+(12, 'Fakhar Zaman', 3100, 95);
+
+-- ================= TASKS / QUERIES =================
+
+-- 1. Display all players
+SELECT * FROM Players;
+
+-- 2. Players with more than 1000 runs
+SELECT * FROM Players WHERE runs > 1000;
+
+-- 3. Players who played less than 50 matches
+SELECT * FROM Players WHERE matches < 50;
+
+-- 4. Arrange players in alphabetical order (A-Z)
+SELECT * FROM Players ORDER BY player_name ASC;
+
+-- 5. Players with runs between 500 and 2000
+SELECT * FROM Players WHERE runs BETWEEN 500 AND 2000;
+
+-- 6. Count total number of players
+SELECT COUNT(*) FROM Players;
+
+-- 7. Players whose names start with 'S'
+SELECT * FROM Players WHERE player_name LIKE 'S%';
+
+-- 8. Players with runs less than 400 OR runs = 0 (OR Operator)
+SELECT * FROM Players WHERE runs < 400 OR runs = 0;
+
+-- 9. Players with more than 1000 runs AND more than 50 matches (AND Operator)
+SELECT * FROM Players WHERE runs > 1000 AND matches > 50;
+
+-- 10. Players NOT having matches greater than 60 (NOT Operator)
+SELECT * FROM Players WHERE NOT matches > 60;
