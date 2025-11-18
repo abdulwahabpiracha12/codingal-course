@@ -1,0 +1,45 @@
+-- Create a table named STUDENTS
+CREATE TABLE STUDENTS (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    class VARCHAR(10),
+    marks INT,
+    fees_paid INT
+);
+
+-- Insert sample values
+INSERT INTO STUDENTS (student_id, name, class, marks, fees_paid) VALUES
+(1, 'Abdul Wahab', '10A', 85, 12000),
+(2, 'Babar',       '10A', 91, 15000),
+(3, 'Osman',       '10B', 76, 11000),
+(4, 'Ahmed',       '10B', 88, 12500),
+(5, 'Saim',        '10A', 95, 14000),
+(6, 'Hamza',       '10C', 67, 9000);
+
+-- 1. Count total students
+SELECT COUNT(*) AS Total_Students
+FROM STUDENTS;
+
+-- 2. Find average marks
+SELECT AVG(marks) AS Average_Marks
+FROM STUDENTS;
+
+-- 3. Find highest and lowest marks
+SELECT MAX(marks) AS Highest_Marks,
+       MIN(marks) AS Lowest_Marks
+FROM STUDENTS;
+
+-- 4. Class-wise summary using aggregate functions
+SELECT class,
+       COUNT(*) AS Students_In_Class,
+       AVG(marks) AS Avg_Marks,
+       SUM(fees_paid) AS Total_Fees_Collected
+FROM STUDENTS
+GROUP BY class;
+
+-- 5. Find classes with more than 2 students
+SELECT class,
+       COUNT(*) AS Total_Students
+FROM STUDENTS
+GROUP BY class
+HAVING COUNT(*) > 2;
