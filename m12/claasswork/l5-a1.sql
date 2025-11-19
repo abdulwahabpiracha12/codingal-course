@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Salesman;
 CREATE TABLE IF NOT EXISTS Salesman (    
   Salesman_id TEXT PRIMARY KEY,    
   name TEXT,    
