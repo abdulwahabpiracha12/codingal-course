@@ -1,0 +1,84 @@
+----------------------------------------------------
+-- 1️⃣ Create the Employees Table
+----------------------------------------------------
+CREATE TABLE Employees (
+    EmpID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Department VARCHAR(50),
+    City VARCHAR(50),
+    Salary INT
+);
+
+----------------------------------------------------
+-- 2️⃣ Insert Sample Data
+----------------------------------------------------
+INSERT INTO Employees (EmpID, Name, Department, City, Salary) VALUES
+(1, 'Arun Kumar', 'Sales', 'Delhi', 45000),
+(2, 'Meera Joshi', 'HR', 'Mumbai', 52000),
+(3, 'Ravi Kumar', 'Sales', 'Chennai', 48000),
+(4, 'Neha Sharma', 'IT', 'Delhi', 60000),
+(5, 'Karan Arora', 'IT', 'Kolkata', 54000),
+(6, 'Amit Kumar', 'Sales', 'Delhi', 47000);
+
+----------------------------------------------------
+-- 3️⃣ LIKE Operator Examples
+----------------------------------------------------
+-- Names starting with A
+SELECT * FROM Employees
+WHERE Name LIKE 'A%';
+
+-- Names ending with Kumar
+SELECT * FROM Employees
+WHERE Name LIKE '%Kumar';
+
+-- Names containing 'ar'
+SELECT * FROM Employees
+WHERE Name LIKE '%ar%';
+
+----------------------------------------------------
+-- 4️⃣ DISTINCT Keyword
+----------------------------------------------------
+-- Unique cities
+SELECT DISTINCT City FROM Employees;
+
+-- Unique departments
+SELECT DISTINCT Department FROM Employees;
+
+----------------------------------------------------
+-- 5️⃣ Sorting
+----------------------------------------------------
+-- Sort by salary (descending)
+SELECT * FROM Employees
+ORDER BY Salary DESC;
+
+-- Sort names alphabetically
+SELECT * FROM Employees
+ORDER BY Name ASC;
+
+----------------------------------------------------
+-- 6️⃣ Filtering
+----------------------------------------------------
+-- Employees with salary > 50,000
+SELECT * FROM Employees
+WHERE Salary > 50000;
+
+-- Employees from Delhi
+SELECT * FROM Employees
+WHERE City = 'Delhi';
+
+----------------------------------------------------
+-- 7️⃣ Combined LIKE + DISTINCT + Sorting + Filtering
+----------------------------------------------------
+-- Sales employees whose name includes 'Kumar', highest salary first
+SELECT DISTINCT Name, Department, Salary
+FROM Employees
+WHERE Department = 'Sales'
+  AND Name LIKE '%Kumar%'
+ORDER BY Salary DESC;
+
+-- Delhi employees whose name starts with A, sorted alphabetically
+SELECT DISTINCT Name, City
+FROM Employees
+WHERE City = 'Delhi'
+  AND Name LIKE 'A%'
+ORDER BY Name ASC;
