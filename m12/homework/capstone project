@@ -1,0 +1,67 @@
+----------------------------------------------------
+-- 1️⃣ Create a table
+----------------------------------------------------
+CREATE TABLE Students (
+    RollNo INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Class VARCHAR(10),
+    Marks INT,
+    City VARCHAR(50)
+);
+
+----------------------------------------------------
+-- 2️⃣ Insert / Manipulate Data
+----------------------------------------------------
+INSERT INTO Students (RollNo, Name, Class, Marks, City) VALUES
+(1, 'Arun', '10A', 88, 'Delhi'),
+(2, 'Sneha', '10A', 92, 'Mumbai'),
+(3, 'Ravi', '10B', 74, 'Chennai'),
+(4, 'Meera', '10B', 67, 'Delhi'),
+(5, 'Karan', '10A', 81, 'Kolkata');
+
+----------------------------------------------------
+-- 3️⃣ Update a Record
+----------------------------------------------------
+UPDATE Students
+SET Marks = 90
+WHERE RollNo = 3;
+
+----------------------------------------------------
+-- 4️⃣ Delete a Record
+----------------------------------------------------
+DELETE FROM Students
+WHERE RollNo = 4;
+
+----------------------------------------------------
+-- 5️⃣ Sorting Records
+----------------------------------------------------
+-- Sort by highest marks first
+SELECT *
+FROM Students
+ORDER BY Marks DESC;
+
+-- Sort alphabetically by name
+SELECT *
+FROM Students
+ORDER BY Name ASC;
+
+----------------------------------------------------
+-- 6️⃣ Filtering Records
+----------------------------------------------------
+-- Students scoring above 80
+SELECT *
+FROM Students
+WHERE Marks > 80;
+
+-- Students from a specific city
+SELECT *
+FROM Students
+WHERE City = 'Delhi';
+
+----------------------------------------------------
+-- 7️⃣ Combine sorting + filtering
+----------------------------------------------------
+SELECT *
+FROM Students
+WHERE Marks >= 80
+ORDER BY Name ASC;
