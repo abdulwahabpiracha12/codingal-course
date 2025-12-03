@@ -1,0 +1,34 @@
+import sqlite3
+import pandas as pd
+
+# -----------------------------------
+# Connect to the SQLite database
+# -----------------------------------
+connection = sqlite3.connect("database.sqlite")
+cursor = connection.cursor()
+
+# -----------------------------------
+# Get all table names
+# -----------------------------------
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+tables = cursor.fetchall()
+
+print("Tables Found:", tables)
+print("=====================================")
+
+# -----------------------------------
+# Read and print tables using pandas
+# -----------------------------------
+for table in tables:
+    table_name = table[0]
+    print(f"\n🔹 Table: {table_name}")
+    print("-------------------------------------")
+
+    # Read table into pandas DataFrame
+    df = pd.read_sql_query(f"SELECT * FROM {table_name}", connection)
+
+    # Print clean table
+    print(df)
+    print("\n")
+
+connection.close()
