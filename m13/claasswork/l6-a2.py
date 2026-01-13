@@ -16,7 +16,7 @@ WHERE type='table';""", conn)
 print(tables) # Changed from 'tables' to 'print(tables)' for execution
 
 #Fetch Details of all matches played by CSK in year 2015
-csk_matches_2015 = pd.read_sql("""SELECT Match_Id, Team_2 AS Away_Team, Toss_Winner Match_Winner
+csk_matches_2015 = pd.read_sql("""SELECT Match_Id, Team_2 AS Away_Team, Toss_Winner, Match_Winner
                                     FROM Match
                                     WHERE Team_1 =
                                     (SELECT Team_1
