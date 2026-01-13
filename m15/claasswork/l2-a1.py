@@ -9,5 +9,5 @@ plt.xlabel('Velocity m/s')
 plt.ylabel('Time(s)')
 plt.xlim(5, 30)
 plt.ylim(0, 30)
-Splt.legend()
+
 plt.show()
