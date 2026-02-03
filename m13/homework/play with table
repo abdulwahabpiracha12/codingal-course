@@ -1,0 +1,48 @@
+import sqlite3
+
+# Create database connection (in memory)
+conn = sqlite3.connect(":memory:")
+cursor = conn.cursor()
+
+# Create a table
+cursor.execute("""
+CREATE TABLE students (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    marks INTEGER
+)
+""")
+
+# Insert data
+students_data = [
+    (1, "Ali", 85),
+    (2, "Ahmed", 72),
+    (3, "Sara", 90),
+    (4, "Ayesha", 65),
+    (5, "Usman", 78)
+]
+
+cursor.executemany("INSERT INTO students VALUES (?, ?, ?)", students_data)
+
+# 1️⃣ SELECT all records
+print("All Students:")
+cursor.execute("SELECT * FROM students")
+for row in cursor.fetchall():
+    print(row)
+
+# 2️⃣ SELECT with WHERE clause
+print("\nStudents with marks > 75:")
+cursor.execute("SELECT name, marks FROM students WHERE marks > 75")
+for row in cursor.fetchall():
+    print(row)
+
+# 3️⃣ MIN marks
+cursor.execute("SELECT MIN(marks) FROM students")
+print("\nMinimum Marks:", cursor.fetchone()[0])
+
+# 4️⃣ MAX marks
+cursor.execute("SELECT MAX(marks) FROM students")
+print("Maximum Marks:", cursor.fetchone()[0])
+
+# Close connection
+conn.close()

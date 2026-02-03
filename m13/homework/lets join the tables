@@ -1,0 +1,90 @@
+import pandas as pd
+import sqlite3
+
+# Connect to database
+database = 'database.sqlite'
+conn = sqlite3.connect(database)
+
+# 1️⃣ Show all tables in database
+tables = pd.read_sql("""
+SELECT name
+FROM sqlite_master
+WHERE type='table';
+""", conn)
+
+print("Tables in Database:")
+print(tables)
+
+
+# 2️⃣ Display all records from Salesman table
+df_all = pd.read_sql("""
+SELECT * 
+FROM Salesman;
+""", conn)
+
+print("\nAll Salesman Records:")
+print(df_all)
+
+
+# 3️⃣ Salesmen from a specific city
+df_city = pd.read_sql("""
+SELECT name, city
+FROM Salesman
+WHERE city = 'Paris';
+""", conn)
+
+print("\nSalesmen from Paris:")
+print(df_city)
+
+
+# 4️⃣ Salesmen with commission greater than 0.10
+df_commission = pd.read_sql("""
+SELECT name, Comission
+FROM Salesman
+WHERE Comission > 0.10;
+""", conn)
+
+print("\nSalesmen with Commission > 0.10:")
+print(df_commission)
+
+
+# 5️⃣ Maximum commission
+df_max = pd.read_sql("""
+SELECT MAX(Comission) AS max_commission
+FROM Salesman;
+""", conn)
+
+print("\nMaximum Commission:")
+print(df_max)
+
+
+# 6️⃣ Minimum commission
+df_min = pd.read_sql("""
+SELECT MIN(Comission) AS min_commission
+FROM Salesman;
+""", conn)
+
+print("\nMinimum Commission:")
+print(df_min)
+
+
+# 7️⃣ Average commission
+df_avg = pd.read_sql("""
+SELECT AVG(Comission) AS average_commission
+FROM Salesman;
+""", conn)
+
+print("\nAverage Commission:")
+print(df_avg)
+
+
+# 8️⃣ Count number of salesmen
+df_count = pd.read_sql("""
+SELECT COUNT(*) AS total_salesmen
+FROM Salesman;
+""", conn)
+
+print("\nTotal Number of Salesmen:")
+print(df_count)
+
+conn.close()
