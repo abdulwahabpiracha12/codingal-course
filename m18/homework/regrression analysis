@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Given data
+X = np.array([1, 2, 3, 4, 5])
+Y = np.array([2, 4, 5, 4, 6])
+
+# Calculate slope (m) and intercept (c) manually
+n = len(X)
+
+sum_x = np.sum(X)
+sum_y = np.sum(Y)
+sum_xy = np.sum(X * Y)
+sum_x2 = np.sum(X * X)
+
+# Formula for slope (m)
+m = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - sum_x**2)
+
+# Formula for intercept (c)
+c = (sum_y - m * sum_x) / n
+
+print("Slope (m):", m)
+print("Intercept (c):", c)
+
+# Predicted values
+Y_pred = m * X + c
+
+# Plotting
+plt.scatter(X, Y)          # original points
+plt.plot(X, Y_pred)        # regression line
+
+# Labels and title
+plt.xlabel("X values")
+plt.ylabel("Y values")
+plt.title("Linear Regression Graph")
+
+# Show graph
+plt.show()
