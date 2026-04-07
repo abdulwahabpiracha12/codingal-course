@@ -1,0 +1,20 @@
+import math
+
+# Function to calculate combination (nCr)
+def nCr(n, r):
+    return math.comb(n, r)
+
+# PMF of Binomial Distribution
+def binomial_pmf(n, k, p):
+    return nCr(n, k) * (p**k) * ((1 - p)**(n - k))
+
+# Given values
+n = 10        # number of trials (coin flips)
+p = 0.5       # probability of head
+
+# Calculate probability for k = 2, 3, 4
+probability = 0
+for k in range(2, 5):
+    probability += binomial_pmf(n, k, p)
+
+print("Probability of getting between 2 and 4 heads:", probability)
