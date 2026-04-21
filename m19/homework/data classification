@@ -1,0 +1,72 @@
+import numpy as np
+
+# -----------------------------
+# Step 1: Create Dataset
+# -----------------------------
+# You can replace this with your given dataset
+X = np.array([1, 2, 3, 4, 5, 6])   # Features
+y = np.array([0, 1, 0, 1, 0, 1])   # Labels
+
+# -----------------------------
+# Step 2: Check Binary or Multi-class
+# -----------------------------
+unique_classes = np.unique(y)
+
+print("Unique Classes:", unique_classes)
+
+if len(unique_classes) == 2:
+    print("Dataset Type: Binary Classification")
+else:
+    print("Dataset Type: Multi-class Classification")
+
+# -----------------------------
+# Step 3: Reshape Data
+# -----------------------------
+X = X.reshape(-1, 1)
+y = y.reshape(-1, 1)
+
+# -----------------------------
+# Step 4: Initialize Parameters
+# -----------------------------
+weights = np.zeros((1, 1))
+bias = 0
+learning_rate = 0.1
+epochs = 1000
+
+# -----------------------------
+# Step 5: Sigmoid Function
+# -----------------------------
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+# -----------------------------
+# Step 6: Training (Gradient Descent)
+# -----------------------------
+for i in range(epochs):
+    z = np.dot(X, weights) + bias
+    predictions = sigmoid(z)
+
+    error = predictions - y
+
+    dw = np.dot(X.T, error) / len(X)
+    db = np.sum(error) / len(X)
+
+    weights -= learning_rate * dw
+    bias -= learning_rate * db
+
+# -----------------------------
+# Step 7: Final Predictions
+# -----------------------------
+z = np.dot(X, weights) + bias
+probabilities = sigmoid(z)
+
+# Convert probabilities to 0 or 1
+predicted_classes = (probabilities >= 0.5).astype(int)
+
+# -----------------------------
+# Step 8: Output Results
+# -----------------------------
+print("\nFinal Weights:", weights)
+print("Final Bias:", bias)
+print("Probabilities:\n", probabilities)
+print("Predicted Classes:\n", predicted_classes)

@@ -1,0 +1,45 @@
+import numpy as np
+
+# Example data (you can replace with your own dataset)
+# y is input, x is output (as per your assignment)
+y = np.array([1, 2, 3, 4, 5])   # feature
+x = np.array([0, 0, 0, 1, 1])   # label (binary)
+
+# Reshape data
+y = y.reshape(-1, 1)
+x = x.reshape(-1, 1)
+
+# Initialize parameters
+weights = np.zeros((1, 1))
+bias = 0
+learning_rate = 0.1
+epochs = 1000
+
+# Sigmoid function
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+# Training loop
+for i in range(epochs):
+    # Forward propagation
+    z = np.dot(y, weights) + bias
+    predictions = sigmoid(z)
+
+    # Compute error
+    error = predictions - x
+
+    # Gradients
+    dw = np.dot(y.T, error) / len(y)
+    db = np.sum(error) / len(y)
+
+    # Update parameters
+    weights -= learning_rate * dw
+    bias -= learning_rate * db
+
+# Final predictions
+z = np.dot(y, weights) + bias
+final_predictions = sigmoid(z)
+
+print("Weights:", weights)
+print("Bias:", bias)
+print("Predictions:", final_predictions)
