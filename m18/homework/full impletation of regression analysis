@@ -1,0 +1,48 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Dataset
+X = np.array([1, 2, 3, 4, 5])
+Y = np.array([2, 3, 5, 6, 8])
+
+# 2. Gradient Descent Parameters
+m = 0  # Initial slope
+c = 0  # Initial intercept
+L = 0.01  # Learning rate (how big of a step to take)
+epochs = 1000  # How many times to repeat the process
+n = float(len(X)) 
+
+# 3. Performing Gradient Descent
+for i in range(epochs): 
+    Y_pred = m*X + c  # The current predicted value of Y
+    
+    # Calculate gradients (derivatives)
+    D_m = (-2/n) * sum(X * (Y - Y_pred))  # Derivative w.r.t m
+    D_c = (-2/n) * sum(Y - Y_pred)      # Derivative w.r.t c
+    
+    # Update m and c
+    m = m - L * D_m
+    c = c - L * D_c
+
+# 4. Final Predictions and Metrics
+Y_final = m*X + c
+mse = np.mean((Y - Y_final)**2)
+
+# Calculate R^2 Score
+ss_res = np.sum((Y - Y_final)**2)
+ss_tot = np.sum((Y - np.mean(Y))**2)
+r2 = 1 - (ss_res / ss_tot)
+
+print(f"Final Slope (m): {m:.4f}")
+print(f"Final Intercept (c): {c:.4f}")
+print(f"Mean Squared Error: {mse:.4f}")
+print(f"R^2 Score: {r2:.4f}")
+
+# 5. Graphing the result
+plt.scatter(X, Y, color='blue', label='Data Points') 
+plt.plot([min(X), max(X)], [min(Y_final), max(Y_final)], color='red', label='Regression Line')
+plt.title('Linear Regression via Gradient Descent')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.show()
