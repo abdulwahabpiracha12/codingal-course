@@ -1,0 +1,89 @@
+# ==============================
+# RECOMMENDATION ENGINE PROJECT
+# ==============================
+
+import pandas as pd
+import numpy as np
+
+# ==============================
+# SAMPLE DATASET
+# ==============================
+
+# Movies dataset
+movies = pd.DataFrame({
+    'movie_id': [1, 2, 3, 4, 5],
+    'title': ['Avengers', 'Batman', 'Superman', 'Iron Man', 'Spiderman'],
+    'genre': ['Action', 'Action', 'Action', 'Action', 'Action']
+})
+
+# User ratings dataset
+ratings = pd.DataFrame({
+    'user_id': [1, 1, 2, 2, 3, 3],
+    'movie_id': [1, 2, 2, 3, 3, 4],
+    'rating': [5, 4, 5, 3, 4, 5]
+})
+
+# ==============================
+# CONTENT-BASED FILTERING
+# ==============================
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# Convert genre into vectors
+cv = CountVectorizer()
+matrix = cv.fit_transform(movies['genre'])
+
+# Compute similarity
+similarity = cosine_similarity(matrix)
+
+# Recommendation function
+def content_recommend(movie_title):
+    index = movies[movies['title'] == movie_title].index[0]
+    distances = list(enumerate(similarity[index]))
+    sorted_movies = sorted(distances, key=lambda x: x[1], reverse=True)[1:4]
+
+    print(f"\nContent-Based Recommendations for '{movie_title}':")
+    for i in sorted_movies:
+        print(movies.iloc[i[0]].title)
+
+# ==============================
+# COLLABORATIVE FILTERING
+# ==============================
+
+# Create user-item matrix
+user_movie_matrix = ratings.pivot_table(index='user_id', columns='movie_id', values='rating').fillna(0)
+
+# Compute similarity between users
+user_similarity = cosine_similarity(user_movie_matrix)
+
+# Convert to DataFrame
+user_similarity_df = pd.DataFrame(user_similarity, index=user_movie_matrix.index, columns=user_movie_matrix.index)
+
+# Recommendation function
+def collaborative_recommend(user_id):
+    similar_users = user_similarity_df[user_id].sort_values(ascending=False)[1:]
+    most_similar_user = similar_users.index[0]
+
+    print(f"\nCollaborative Recommendations for User {user_id}:")
+
+    # Movies liked by similar user
+    similar_user_movies = ratings[ratings['user_id'] == most_similar_user]
+    
+    # Movies already watched by current user
+    user_movies = ratings[ratings['user_id'] == user_id]['movie_id'].tolist()
+
+    # Recommend new movies
+    for movie_id in similar_user_movies['movie_id']:
+        if movie_id not in user_movies:
+            print(movies[movies['movie_id'] == movie_id]['title'].values[0])
+
+# ==============================
+# RUN THE SYSTEM
+# ==============================
+
+# Test Content-Based
+content_recommend('Avengers')
+
+# Test Collaborative
+collaborative_recommend(1)
